@@ -5,6 +5,10 @@ Bundle-SymbolicName: edu.oregonstate.CS589.comparator;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: edu.oregonstate.cs589.comparator.Activator
 Require-Bundle: org.eclipse.ui,
- org.eclipse.core.runtime
+ org.eclipse.core.runtime,
+ org.eclipse.core.resources;bundle-version="3.8.101",
+ org.eclipse.compare;bundle-version="3.5.401",
+ org.eclipse.egit.ui;bundle-version="3.0.3",
+ org.eclipse.jgit;bundle-version="3.0.3"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
