@@ -19,5 +19,14 @@
             id="edu.oregonstate.CS589.comparator.perspective">
       </perspective>
    </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            class="edu.oregonstate.cs589.comparator.CommitView"
+            id="edu.oregonstate.CS589.comparator.commitView"
+            name="name"
+            restorable="true">
+      </view>
+   </extension>
 
 </plugin>
