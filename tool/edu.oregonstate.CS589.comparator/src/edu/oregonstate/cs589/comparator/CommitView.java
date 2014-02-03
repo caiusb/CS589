@@ -6,11 +6,12 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.ui.part.ViewPart;
 
-public class CommitView extends ViewPart {
+public class CommitView extends ViewPart implements CommitViewSetter{
 	public static final String ID = "edu.oregonstate.CS589.comparator.commitView";
+	private String message;
 
 	public CommitView() {
-		// TODO Auto-generated constructor stub
+		message = "";
 	}
 
 	@Override
@@ -19,13 +20,18 @@ public class CommitView extends ViewPart {
 		parent.setLayout(layout);
 		
 		Label label = new Label(parent, SWT.NONE);
-		label.setText("Hello World");
+		label.setText(message);
 	}
 
 	@Override
 	public void setFocus() {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public void setMessage(String message) {
+		this.message = message;
 	}
 
 }
