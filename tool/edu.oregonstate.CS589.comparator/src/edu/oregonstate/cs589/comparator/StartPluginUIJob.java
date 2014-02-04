@@ -20,23 +20,14 @@ public class StartPluginUIJob extends UIJob {
 		super(string);
 	}
 
-	@SuppressWarnings({ "unused", "restriction" })
+	@SuppressWarnings({ "unused", "restriction"})
 	@Override
 	public IStatus runInUIThread(IProgressMonitor monitor) {
 
 		try {
-			File repoFile = Activator.getDefault().getProjectFile("testData/P/.git");
-			Repository repository = new FileRepository(repoFile);
+			Task task = new Task("testData/P/.git", "040d292f2ea983a918bd5be9d0242c5dcfff9f38");
 
-			RevWalk rw = new RevWalk(repository);	
-			System.out.println(repository.getAllRefs());
-			
-			ObjectId cmitId = repository.resolve("040d292f2ea983a918bd5be9d0242c5dcfff9f38");
-			
-			RevCommit compareCommit = rw.parseCommit(repository.resolve("040d292f2ea983a918bd5be9d0242c5dcfff9f38"));
-			RevCommit baseCommit = rw.parseCommit(repository.resolve("2a5d7c13205ffb27cb9dca9875ef1261acba808b"));
-			
-			CompareUI.openCompareDialog(new GitCompareEditorInput(compareCommit.getName(), baseCommit.getName(), repository));
+			CompareUI.openCompareDialog(new GitCompareEditorInput(task.getTargetCommitID(), task.getParentCommitID(), task.getRepository()));
 			
 		} catch (IOException e) {
 			e.printStackTrace();
