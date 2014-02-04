@@ -25,14 +25,18 @@ public class StartPluginUIJob extends UIJob {
 	public IStatus runInUIThread(IProgressMonitor monitor) {
 
 		try {
-			Task task = new Task("testData/P/.git", "040d292f2ea983a918bd5be9d0242c5dcfff9f38");
-
-			CompareUI.openCompareDialog(new GitCompareEditorInput(task.getTargetCommitID(), task.getParentCommitID(), task.getRepository()));
+			displayCommit();
 			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		
 		return null;
+	}
+
+	private void displayCommit() throws IOException {
+		Task task = new Task("testData/P/.git", "040d292f2ea983a918bd5be9d0242c5dcfff9f38");
+
+		CompareUI.openCompareDialog(new GitCompareEditorInput(task.getTargetCommitID(), task.getParentCommitID(), task.getRepository()));
 	}
 }
