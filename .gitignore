@@ -1,3 +1,4 @@
 /runtime-*
 /tool/.metadata
 bin
+/tool/edu.oregonstate.CS589.comparator/testData/repos/*

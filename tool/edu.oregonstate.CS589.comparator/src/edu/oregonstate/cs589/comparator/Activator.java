@@ -1,8 +1,14 @@
 package edu.oregonstate.cs589.comparator;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+import java.util.Collections;
+
+import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
-import org.eclipse.ui.progress.UIJob;
 import org.osgi.framework.BundleContext;
 
 /**
@@ -58,5 +64,18 @@ public class Activator extends AbstractUIPlugin {
 	 */
 	public static ImageDescriptor getImageDescriptor(String path) {
 		return imageDescriptorFromPlugin(PLUGIN_ID, path);
+	}
+	
+	public File getProjectFile(String filePath) {
+		Path path = new Path(filePath);
+		URL url = FileLocator.find(getBundle(), path, Collections.EMPTY_MAP);
+		URL fileUrl = null;
+		try {
+			fileUrl = FileLocator.toFileURL(url);
+		} catch (IOException e) {
+			// Will happen if the file cannot be read for some reason
+			e.printStackTrace();
+		}
+		return new File(fileUrl.getPath());
 	}
 }
