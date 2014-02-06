@@ -13,6 +13,8 @@ public class CommitView extends ViewPart implements CommitViewSetter{
 	private Label label;
 	private Composite parent;
 
+	private Task task;
+
 	public CommitView() {
 	}
 
@@ -32,15 +34,16 @@ public class CommitView extends ViewPart implements CommitViewSetter{
 	}
 
 	@Override
-	public void setMessage(final String message) {
-		Display.getDefault().syncExec(new Runnable() {
+	public void setTask(final Task task) {
+		this.task = task;
+		/*Display.getDefault().syncExec(new Runnable() {
 			
 			@Override
 			public void run() {
-				label.setText(message);
+				label.setText(task);
 				label.pack(true);
 			}
-		});
+		});*/
 	}
 
 }

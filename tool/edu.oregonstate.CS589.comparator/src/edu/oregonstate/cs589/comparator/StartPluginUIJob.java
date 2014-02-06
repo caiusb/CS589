@@ -22,14 +22,16 @@ public class StartPluginUIJob extends UIJob {
 	@Override
 	public IStatus runInUIThread(IProgressMonitor monitor) {
 		try {
+			Task task = new Task("testData/P/.git", "040d292f2ea983a918bd5be9d0242c5dcfff9f38");
+
 			String viewId = CommitView.ID;
 			IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
 			
 			IViewPart view = page.showView(viewId);
 			CommitViewSetter viewSetter = (CommitViewSetter)view;
-			viewSetter.setMessage("Hello World");
+			viewSetter.setTask(task);
 			
-		} catch (PartInitException e) {
+		} catch (PartInitException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -37,8 +39,7 @@ public class StartPluginUIJob extends UIJob {
 	}
 
 	private void displayCommit() throws IOException {
-		Task task = new Task("testData/P/.git", "040d292f2ea983a918bd5be9d0242c5dcfff9f38");
 
-		CompareUI.openCompareDialog(new GitCompareEditorInput(task.getTargetCommitID(), task.getParentCommitID(), task.getRepository()));
+		//CompareUI.openCompareDialog(new GitCompareEditorInput(task.getTargetCommitID(), task.getParentCommitID(), task.getRepository()));
 	}
 }
