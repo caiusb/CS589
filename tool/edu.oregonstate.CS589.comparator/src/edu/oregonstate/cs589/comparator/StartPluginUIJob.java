@@ -22,7 +22,7 @@ public class StartPluginUIJob extends UIJob {
 	@Override
 	public IStatus runInUIThread(IProgressMonitor monitor) {
 		try {
-			Task task = new Task("testData/P/.git", "040d292f2ea983a918bd5be9d0242c5dcfff9f38");
+			Task task = new Task("testData/repos/P/.git", "040d292f2ea983a918bd5be9d0242c5dcfff9f38");
 
 			String viewId = CommitView.ID;
 			IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
