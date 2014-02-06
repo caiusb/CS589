@@ -22,13 +22,13 @@ public class CommitView extends ViewPart implements CommitViewSetter{
 	@Override
 	public void createPartControl(Composite parent) {
 		this.parent = parent;
-		RowLayout layout = new RowLayout();
+		RowLayout layout = new RowLayout(SWT.VERTICAL);
 		parent.setLayout(layout);
 		
 		Label commiMessageLabel = new Label(parent, SWT.NONE);
-		commiMessageLabel.setText("Commit message");
+		commiMessageLabel.setText("Commit message:");
 		
-		commitMessage = new Text(parent, SWT.NONE);
+		commitMessage = new Text(parent, SWT.BORDER);
 		commitMessage.setEditable(false);
 	}
 
