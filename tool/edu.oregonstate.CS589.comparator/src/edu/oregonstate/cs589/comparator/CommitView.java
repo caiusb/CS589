@@ -18,7 +18,6 @@ public class CommitView extends ViewPart implements CommitViewSetter{
 	
 	private Task task;
 
-	private Composite rootComposite;
 	private Text commitMessage;
 	private Text commitDescription;
 
@@ -27,15 +26,25 @@ public class CommitView extends ViewPart implements CommitViewSetter{
 
 	@Override
 	public void createPartControl(Composite parent) {
-		rootComposite = new Composite(parent, SWT.NONE);
+		Composite rootComposite = new Composite(parent, SWT.NONE);
 		addGridLayout(rootComposite);
 		
+		addCommiMessage(rootComposite);
+		
+		addCommitDescription(rootComposite);
+	    
+		addNextCommitButton(rootComposite);
+	}
+
+	private void addCommiMessage(Composite rootComposite) {
 		Label commiMessageLabel = new Label(rootComposite, SWT.NONE);
 		commiMessageLabel.setText("Commit message:");
 
 		commitMessage = new Text(rootComposite, SWT.BORDER);
 		commitMessage.setEditable(false);
-		
+	}
+
+	private void addCommitDescription(Composite rootComposite) {
 		Label commitDescriptionLabel = new Label(rootComposite, SWT.NONE);
 		commitDescriptionLabel.setText("Your commit description:");
 
@@ -44,7 +53,9 @@ public class CommitView extends ViewPart implements CommitViewSetter{
 		GridData gridData = new GridData(SWT.FILL, SWT.CENTER, true, false);
 		gridData.heightHint = 15 * commitDescription.getLineHeight();
 		commitDescription.setLayoutData(gridData);
-	    
+	}
+
+	private void addNextCommitButton(Composite rootComposite) {
 		Button nextCommitButton = new Button(rootComposite, SWT.PUSH);
 		nextCommitButton.setText("Proceed to next commit");
 	}
