@@ -46,4 +46,13 @@ public class Task {
 	public String getCommitMessage() {
 		return targetCommit.getFullMessage();
 	}
+
+	public void recordTaskStart() {
+		System.err.println("Task start");
+		
+	}
+
+	public void recordTaskEnd() {
+		System.err.println("Task end");
+	}
 }

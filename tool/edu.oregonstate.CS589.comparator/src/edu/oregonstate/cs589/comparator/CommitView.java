@@ -4,6 +4,8 @@ import org.eclipse.compare.CompareUI;
 import org.eclipse.egit.ui.internal.merge.GitCompareEditorInput;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.ScrolledComposite;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
@@ -58,6 +60,20 @@ public class CommitView extends ViewPart implements CommitViewSetter{
 	private void addNextCommitButton(Composite rootComposite) {
 		Button nextCommitButton = new Button(rootComposite, SWT.PUSH);
 		nextCommitButton.setText("Proceed to next commit");
+		
+		nextCommitButton.addSelectionListener(new SelectionListener() {
+			
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				task.recordTaskEnd();
+				
+			}
+			
+			@Override
+			public void widgetDefaultSelected(SelectionEvent e) {
+				widgetSelected(e);
+			}
+		});
 	}
 	
 	private void addGridLayout(Composite element) {
@@ -85,6 +101,7 @@ public class CommitView extends ViewPart implements CommitViewSetter{
 				CompareUI.openCompareEditor(compareEditorInput, true);
 			}
 		});
+		
+		task.recordTaskStart();
 	}
-
 }
