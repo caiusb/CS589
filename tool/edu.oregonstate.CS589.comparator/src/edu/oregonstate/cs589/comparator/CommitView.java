@@ -1,6 +1,9 @@
 package edu.oregonstate.cs589.comparator;
 
+import org.eclipse.compare.CompareUI;
+import org.eclipse.egit.ui.internal.merge.GitCompareEditorInput;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.layout.RowData;
 import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
@@ -15,6 +18,7 @@ public class CommitView extends ViewPart implements CommitViewSetter{
 
 	private Composite parent;
 	private Text commitMessage;
+	private Text commitDescription;
 
 	public CommitView() {
 	}
@@ -22,6 +26,7 @@ public class CommitView extends ViewPart implements CommitViewSetter{
 	@Override
 	public void createPartControl(Composite parent) {
 		this.parent = parent;
+		
 		RowLayout layout = new RowLayout(SWT.VERTICAL);
 		parent.setLayout(layout);
 		
@@ -30,6 +35,11 @@ public class CommitView extends ViewPart implements CommitViewSetter{
 		
 		commitMessage = new Text(parent, SWT.BORDER);
 		commitMessage.setEditable(false);
+		
+		Label commitDescriptionLabel = new Label(parent, SWT.NONE);
+		commitDescriptionLabel.setText("Your commit description:");
+		
+		commitDescription = new Text(parent, SWT.NONE);
 	}
 
 	@Override
