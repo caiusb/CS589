@@ -57,6 +57,9 @@ public class CommitView extends ViewPart implements CommitViewSetter{
 			public void run() {
 				commitMessage.setText(task.getCommitMessage());
 				commitMessage.pack(true);
+				
+				GitCompareEditorInput compareEditorInput = new GitCompareEditorInput(task.getTargetCommitID(), task.getParentCommitID(), task.getRepository());
+				CompareUI.openCompareEditor(compareEditorInput, true);
 			}
 		});
 	}
