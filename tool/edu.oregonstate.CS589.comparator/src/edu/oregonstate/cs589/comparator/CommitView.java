@@ -3,7 +3,9 @@ package edu.oregonstate.cs589.comparator;
 import org.eclipse.compare.CompareUI;
 import org.eclipse.egit.ui.internal.merge.GitCompareEditorInput;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.layout.RowLayout;
+import org.eclipse.swt.custom.ScrolledComposite;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
@@ -16,7 +18,7 @@ public class CommitView extends ViewPart implements CommitViewSetter{
 	
 	private Task task;
 
-	private Composite parent;
+	private Composite rootComposite;
 	private Text commitMessage;
 	private Text commitDescription;
 
@@ -25,23 +27,31 @@ public class CommitView extends ViewPart implements CommitViewSetter{
 
 	@Override
 	public void createPartControl(Composite parent) {
-		this.parent = parent;
-		RowLayout layout = new RowLayout(SWT.VERTICAL);
-		parent.setLayout(layout);
+		rootComposite = new Composite(parent, SWT.NONE);
+		addGridLayout(rootComposite);
 		
-		Label commiMessageLabel = new Label(parent, SWT.NONE);
+		Label commiMessageLabel = new Label(rootComposite, SWT.NONE);
 		commiMessageLabel.setText("Commit message:");
 
-		commitMessage = new Text(parent, SWT.BORDER);
+		commitMessage = new Text(rootComposite, SWT.BORDER);
 		commitMessage.setEditable(false);
 		
-		Label commitDescriptionLabel = new Label(parent, SWT.NONE);
-		
+		Label commitDescriptionLabel = new Label(rootComposite, SWT.NONE);
 		commitDescriptionLabel.setText("Your commit description:");
-		commitDescription = new Text(parent, SWT.NONE);
-		
-		Button nextCommitButton = new Button(parent, SWT.PUSH);
+
+		commitDescription = new Text(rootComposite, SWT.V_SCROLL | SWT.MULTI);
+	    
+		GridData gridData = new GridData(SWT.FILL, SWT.CENTER, true, false);
+		gridData.heightHint = 15 * commitDescription.getLineHeight();
+		commitDescription.setLayoutData(gridData);
+	    
+		Button nextCommitButton = new Button(rootComposite, SWT.PUSH);
 		nextCommitButton.setText("Proceed to next commit");
+	}
+	
+	private void addGridLayout(Composite element) {
+		element.setLayout(new GridLayout(1, false));
+		element.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 	}
 
 	@Override
