@@ -1,15 +1,19 @@
 package edu.oregonstate.cs589.comparator;
 
+import java.io.Closeable;
 import java.io.File;
 import java.io.IOException;
 
+import org.eclipse.jgit.errors.AmbiguousObjectException;
+import org.eclipse.jgit.errors.IncorrectObjectTypeException;
+import org.eclipse.jgit.errors.MissingObjectException;
 import org.eclipse.jgit.internal.storage.file.FileRepository;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.revwalk.RevWalk;
 import org.json.simple.JSONObject;
 
-public class Task {
+public class Task implements Closeable{
 
 	private Repository repository;
 	private RevCommit targetCommit;
@@ -19,7 +23,15 @@ public class Task {
 	private String taskID = "T01";
 	private String commitOrigin = "Git";
 
+	private EventPersister eventPersister;
+
 	public Task(String repoPath, String targetCommitID) throws IOException {
+		initRepositoryData(repoPath, targetCommitID);
+
+		eventPersister = new EventPersister(taskID + " " + userID);
+	}
+
+	private final void initRepositoryData(String repoPath, String targetCommitID) throws IOException, MissingObjectException, IncorrectObjectTypeException, AmbiguousObjectException {
 		File repoFile = Activator.getDefault().getProjectFile(repoPath);
 		repository = new FileRepository(repoFile);
 
@@ -55,19 +67,19 @@ public class Task {
 	public void recordTaskStart() {
 		JSONObject obj = createCommonJSON(JSONConstants.EVENT_TASK_START);
 
-		EventPersister.persist(obj);
+		eventPersister.persist(obj);
 	}
 
 	public void recordTaskEnd() {
 		JSONObject obj = createCommonJSON(JSONConstants.EVENT_TASK_END);
 
-		EventPersister.persist(obj);
+		eventPersister.persist(obj);
 	}
 
 	public void recordDescriptionChange(String oldText, String newText) {
 		JSONObject obj = createCommonJSON(JSONConstants.EVENT_TYPE);
 
-		EventPersister.persist(obj);
+		eventPersister.persist(obj);
 	}
 
 	private JSONObject createCommonJSON(String type) {
@@ -79,5 +91,11 @@ public class Task {
 		obj.put(JSONConstants.JSON_EVENT_TYPE, type);
 
 		return obj;
+	}
+
+	@Override
+	public void close() throws IOException {
+		eventPersister.persistToFile();
+		repository.close();
 	}
 }

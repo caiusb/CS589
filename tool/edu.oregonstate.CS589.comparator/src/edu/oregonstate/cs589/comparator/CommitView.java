@@ -1,5 +1,8 @@
 package edu.oregonstate.cs589.comparator;
 
+import java.io.Closeable;
+import java.io.IOException;
+
 import org.eclipse.compare.CompareUI;
 import org.eclipse.egit.ui.internal.merge.GitCompareEditorInput;
 import org.eclipse.swt.SWT;
@@ -16,9 +19,9 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.part.ViewPart;
 
-public class CommitView extends ViewPart implements CommitViewSetter{
+public class CommitView extends ViewPart implements CommitViewSetter, Closeable {
 	public static final String ID = "edu.oregonstate.CS589.comparator.commitView";
-	
+
 	private Task task;
 
 	private Text commitMessage;
@@ -31,12 +34,34 @@ public class CommitView extends ViewPart implements CommitViewSetter{
 	public void createPartControl(Composite parent) {
 		Composite rootComposite = new Composite(parent, SWT.NONE);
 		addGridLayout(rootComposite);
-		
+
 		addCommiMessage(rootComposite);
-		
+
 		addCommitDescription(rootComposite);
-	    
+
 		addNextCommitButton(rootComposite);
+
+		Button close = new Button(parent, SWT.PUSH);
+		close.setText("test_close");
+		close.addSelectionListener(new SelectionListener() {
+
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				try {
+					close();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+
+			}
+
+			@Override
+			public void widgetDefaultSelected(SelectionEvent e) {
+				widgetSelected(e);
+
+			}
+		});
 	}
 
 	private void addCommiMessage(Composite rootComposite) {
@@ -52,22 +77,22 @@ public class CommitView extends ViewPart implements CommitViewSetter{
 		commitDescriptionLabel.setText("Your commit description:");
 
 		commitDescription = new Text(rootComposite, SWT.V_SCROLL | SWT.MULTI);
-	    
+
 		GridData gridData = new GridData(SWT.FILL, SWT.CENTER, true, false);
 		gridData.heightHint = 15 * commitDescription.getLineHeight();
 		commitDescription.setLayoutData(gridData);
-		
+
 		commitDescription.addModifyListener(new ModifyListener() {
-			
+
 			String lastText = "";
-			
+
 			@Override
 			public void modifyText(ModifyEvent e) {
 				Text source = (Text) e.getSource();
 				String newText = source.getText();
-				
+
 				task.recordDescriptionChange(lastText, newText);
-				
+
 				lastText = newText;
 			}
 		});
@@ -76,22 +101,22 @@ public class CommitView extends ViewPart implements CommitViewSetter{
 	private void addNextCommitButton(Composite rootComposite) {
 		Button nextCommitButton = new Button(rootComposite, SWT.PUSH);
 		nextCommitButton.setText("Proceed to next commit");
-		
+
 		nextCommitButton.addSelectionListener(new SelectionListener() {
-			
+
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				task.recordTaskEnd();
-				
+
 			}
-			
+
 			@Override
 			public void widgetDefaultSelected(SelectionEvent e) {
 				widgetSelected(e);
 			}
 		});
 	}
-	
+
 	private void addGridLayout(Composite element) {
 		element.setLayout(new GridLayout(1, false));
 		element.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
@@ -107,17 +132,23 @@ public class CommitView extends ViewPart implements CommitViewSetter{
 	public void setTask(final Task task) {
 		this.task = task;
 		Display.getDefault().syncExec(new Runnable() {
-			
+
 			@Override
 			public void run() {
 				commitMessage.setText(task.getCommitMessage());
 				commitMessage.pack(true);
-				
+
 				GitCompareEditorInput compareEditorInput = new GitCompareEditorInput(task.getTargetCommitID(), task.getParentCommitID(), task.getRepository());
 				CompareUI.openCompareEditor(compareEditorInput, true);
 			}
 		});
-		
+
 		task.recordTaskStart();
+	}
+
+	@Override
+	public void close() throws IOException {
+		task.close();
+
 	}
 }
