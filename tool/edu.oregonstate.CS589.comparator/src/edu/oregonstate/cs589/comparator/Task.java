@@ -55,4 +55,9 @@ public class Task {
 	public void recordTaskEnd() {
 		System.err.println("Task end");
 	}
+
+	public void recordDescriptionChange(String oldText, String newText) {
+		System.err.println("Something got typed!");
+		
+	}
 }

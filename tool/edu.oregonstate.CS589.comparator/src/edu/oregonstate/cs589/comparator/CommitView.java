@@ -3,7 +3,8 @@ package edu.oregonstate.cs589.comparator;
 import org.eclipse.compare.CompareUI;
 import org.eclipse.egit.ui.internal.merge.GitCompareEditorInput;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.custom.ScrolledComposite;
+import org.eclipse.swt.events.ModifyEvent;
+import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridData;
@@ -55,6 +56,21 @@ public class CommitView extends ViewPart implements CommitViewSetter{
 		GridData gridData = new GridData(SWT.FILL, SWT.CENTER, true, false);
 		gridData.heightHint = 15 * commitDescription.getLineHeight();
 		commitDescription.setLayoutData(gridData);
+		
+		commitDescription.addModifyListener(new ModifyListener() {
+			
+			String lastText = "";
+			
+			@Override
+			public void modifyText(ModifyEvent e) {
+				Text source = (Text) e.getSource();
+				String newText = source.getText();
+				
+				task.recordDescriptionChange(lastText, newText);
+				
+				lastText = newText;
+			}
+		});
 	}
 
 	private void addNextCommitButton(Composite rootComposite) {
