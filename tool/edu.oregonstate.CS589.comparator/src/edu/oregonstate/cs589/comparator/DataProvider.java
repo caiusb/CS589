@@ -38,7 +38,7 @@ public class DataProvider {
 		while(properties.getProperty(taskName) != null){
 			String[] repoData = properties.getProperty(taskName).trim().split(";");
 			
-			tasks.add(new Task(userID, taskName, repoData[0], repoData[1]));
+			tasks.add(new Task(userID, taskName, repoData[0], repoData[1], repoData[2]));
 			
 			i++;
 			taskName = "T" + i;

@@ -21,13 +21,15 @@ public class Task implements Closeable{
 
 	private String userID;
 	private String taskID;
-	private String commitOrigin = "Git";
+	private String commitOrigin;
 
 	private EventPersister eventPersister;
 
-	public Task(String userID, String taskID, String repoPath, String targetCommitID) throws IOException {
+	public Task(String userID, String taskID, String commitOrigin, String repoPath, String targetCommitID) throws IOException {
 		this.userID = userID;
 		this.taskID = taskID;
+		this.commitOrigin = commitOrigin;
+		
 		eventPersister = new EventPersister(userID + "_" + taskID);
 		
 		initRepositoryData(repoPath, targetCommitID);
