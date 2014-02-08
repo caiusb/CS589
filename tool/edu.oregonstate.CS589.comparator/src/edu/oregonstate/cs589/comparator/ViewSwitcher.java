@@ -9,12 +9,12 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.ui.progress.UIJob;
 
-public class StartPluginUIJob extends UIJob implements FinishCallback{
+public class ViewSwitcher extends UIJob implements FinishCallback{
 
 	private List<ViewSpawner> viewSpawners;
 	private Iterator<ViewSpawner> viewSpawnerIterator;
 
-	public StartPluginUIJob(String string) {
+	public ViewSwitcher(String string) {
 		super(string);
 		viewSpawners = new ArrayList<>();
 	}

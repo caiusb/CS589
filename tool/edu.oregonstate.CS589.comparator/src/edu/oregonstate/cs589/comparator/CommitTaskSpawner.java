@@ -16,19 +16,18 @@ public class CommitTaskSpawner implements ViewSpawner {
 		this.repoPath = repoPath;
 		this.commitID = commitID;
 	}
-	
+
 	@Override
 	public ManagedView spawnView() throws IOException, PartInitException {
 		Task task = new Task(repoPath, commitID);
 
 		String viewId = CommitView.ID;
 		IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
-		
+
 		IViewPart view = page.showView(viewId);
-		CommitViewSetter viewSetter = (CommitViewSetter)view;
+		CommitViewSetter viewSetter = (CommitViewSetter) view;
 		viewSetter.setTask(task);
-		
+
 		return (ManagedView) view;
 	}
-
 }

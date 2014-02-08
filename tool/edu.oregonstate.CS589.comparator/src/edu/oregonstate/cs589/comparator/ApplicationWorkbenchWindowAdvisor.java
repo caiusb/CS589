@@ -29,7 +29,7 @@ public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor {
     public void postWindowOpen() {
     	super.postWindowOpen();
     	
-		UIJob uiJob = new StartPluginUIJob("Registering listeners");
+		UIJob uiJob = new ViewSwitcher("Registering listeners");
 		uiJob.schedule();
     }
 }
