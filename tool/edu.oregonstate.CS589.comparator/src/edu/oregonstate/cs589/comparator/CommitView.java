@@ -1,6 +1,5 @@
 package edu.oregonstate.cs589.comparator;
 
-import java.io.Closeable;
 import java.io.IOException;
 
 import org.eclipse.compare.CompareUI;
@@ -17,15 +16,21 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.ui.IViewReference;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.ViewPart;
 
-public class CommitView extends ViewPart implements CommitViewSetter, Closeable {
+public class CommitView extends ViewPart implements CommitViewSetter,
+		ManagedView {
 	public static final String ID = "edu.oregonstate.CS589.comparator.commitView";
 
 	private Task task;
 
 	private Text commitMessage;
 	private Text commitDescription;
+
+	private FinishCallback finishCallback;
 
 	public CommitView() {
 	}
@@ -40,28 +45,6 @@ public class CommitView extends ViewPart implements CommitViewSetter, Closeable 
 		addCommitDescription(rootComposite);
 
 		addNextCommitButton(rootComposite);
-
-		Button close = new Button(parent, SWT.PUSH);
-		close.setText("test_close");
-		close.addSelectionListener(new SelectionListener() {
-
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				try {
-					close();
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-
-			}
-
-			@Override
-			public void widgetDefaultSelected(SelectionEvent e) {
-				widgetSelected(e);
-
-			}
-		});
 	}
 
 	private void addCommiMessage(Composite rootComposite) {
@@ -107,7 +90,7 @@ public class CommitView extends ViewPart implements CommitViewSetter, Closeable 
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				task.recordTaskEnd();
-
+				close();
 			}
 
 			@Override
@@ -146,9 +129,24 @@ public class CommitView extends ViewPart implements CommitViewSetter, Closeable 
 		task.recordTaskStart();
 	}
 
-	@Override
-	public void close() throws IOException {
-		task.close();
+	public void close() {
+		try {
+			task.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
+		
+		page.closeAllEditors(false);
+		page.hideView(this);
 
+		finishCallback.iAmDone();
+	}
+
+	@Override
+	public void addFinishCallback(FinishCallback callback) {
+		this.finishCallback = callback;
 	}
 }
