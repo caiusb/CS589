@@ -9,18 +9,14 @@ import org.eclipse.ui.PlatformUI;
 
 public class CommitTaskSpawner implements ViewSpawner {
 
-	private String repoPath;
-	private String commitID;
+	private Task task;
 
-	public CommitTaskSpawner(String repoPath, String commitID) {
-		this.repoPath = repoPath;
-		this.commitID = commitID;
+	public CommitTaskSpawner(Task task) {
+		this.task = task;
 	}
 
 	@Override
 	public ManagedView spawnView() throws IOException, PartInitException {
-		Task task = new Task(repoPath, commitID);
-
 		String viewId = CommitView.ID;
 		IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
 

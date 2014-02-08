@@ -9,7 +9,7 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.ui.progress.UIJob;
 
-public class ViewSwitcher extends UIJob implements FinishCallback{
+public class ViewSwitcher extends UIJob implements FinishCallback {
 
 	private List<ViewSpawner> viewSpawners;
 	private Iterator<ViewSpawner> viewSpawnerIterator;
@@ -19,28 +19,32 @@ public class ViewSwitcher extends UIJob implements FinishCallback{
 		viewSpawners = new ArrayList<>();
 	}
 
-	@SuppressWarnings({ "unused", "restriction"})
+	@SuppressWarnings({ "unused", "restriction" })
 	@Override
 	public IStatus runInUIThread(IProgressMonitor monitor) {
-		
-		viewSpawners.add(new CommitTaskSpawner("testData/repos/P/.git", "040d292f2ea983a918bd5be9d0242c5dcfff9f38"));
-		viewSpawners.add(new CommitTaskSpawner("testData/repos/P/.git", "1dfed3f41204035f0e6ec29ccf69d55a44274e35"));
+
+		List<Task> tasks = DataProvider.getInstance().getTasks();
+
+		for (Task task : tasks) {
+			viewSpawners.add(new CommitTaskSpawner(task));
+		}
+
 		viewSpawnerIterator = viewSpawners.iterator();
-		
+
 		spawnNextView();
-		
+
 		return Status.OK_STATUS;
 	}
 
 	private void spawnNextView() {
 		try {
-			
-			if (viewSpawnerIterator.hasNext()){
+
+			if (viewSpawnerIterator.hasNext()) {
 				ViewSpawner viewSpawner = viewSpawnerIterator.next();
 				ManagedView view = viewSpawner.spawnView();
 				view.addFinishCallback(this);
 			}
-			
+
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
