@@ -78,4 +78,8 @@ public class Activator extends AbstractUIPlugin {
 		}
 		return new File(fileUrl.getPath());
 	}
+	
+	public java.nio.file.Path getLocalStoragePath(){
+		return getStateLocation().toFile().toPath();
+	}
 }
