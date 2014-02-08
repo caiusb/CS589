@@ -2,6 +2,7 @@ package edu.oregonstate.cs589.comparator;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class DataProvider {
@@ -50,6 +51,7 @@ public class DataProvider {
 	}
 
 	public List getTasks() {
+		Collections.shuffle(tasks);
 		return tasks;
 	}
 }
