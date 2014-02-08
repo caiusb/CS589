@@ -39,14 +39,14 @@ public class Properties {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		return readAllLines;
 	}
 
 	public String getProperty(String key) {
 		if (key == null)
 			return null;
-		
+
 		return properties.get(key);
 	}
 }

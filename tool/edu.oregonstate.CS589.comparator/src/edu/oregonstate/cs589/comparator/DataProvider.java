@@ -22,7 +22,7 @@ public class DataProvider {
 	private DataProvider() {
 		properties = new Properties();
 		userID = properties.getProperty(USER_ID);
-		
+
 		try {
 			retrieveTasks();
 		} catch (IOException e) {
@@ -32,15 +32,15 @@ public class DataProvider {
 
 	private final void retrieveTasks() throws IOException {
 		tasks = new ArrayList<>();
-		
+
 		int i = 1;
 		String taskName = "T" + i;
-		
-		while(properties.getProperty(taskName) != null){
+
+		while (properties.getProperty(taskName) != null) {
 			String[] repoData = properties.getProperty(taskName).trim().split(";");
-			
+
 			tasks.add(new Task(userID, taskName, repoData[0], repoData[1], repoData[2]));
-			
+
 			i++;
 			taskName = "T" + i;
 		}

@@ -13,7 +13,7 @@ import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.revwalk.RevWalk;
 import org.json.simple.JSONObject;
 
-public class Task implements Closeable{
+public class Task implements Closeable {
 
 	private Repository repository;
 	private RevCommit targetCommit;
@@ -25,13 +25,14 @@ public class Task implements Closeable{
 
 	private EventPersister eventPersister;
 
-	public Task(String userID, String taskID, String commitOrigin, String repoPath, String targetCommitID) throws IOException {
+	public Task(String userID, String taskID, String commitOrigin,
+			String repoPath, String targetCommitID) throws IOException {
 		this.userID = userID;
 		this.taskID = taskID;
 		this.commitOrigin = commitOrigin;
-		
+
 		eventPersister = new EventPersister(userID + "_" + taskID);
-		
+
 		initRepositoryData(repoPath, targetCommitID);
 	}
 
