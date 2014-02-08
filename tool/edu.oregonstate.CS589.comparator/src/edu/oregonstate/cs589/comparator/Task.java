@@ -19,17 +19,18 @@ public class Task implements Closeable{
 	private RevCommit targetCommit;
 	private RevCommit parentCommit;
 
-	private String userID = "Ion";
-	private String taskID = "T01";
+	private String userID;
+	private String taskID;
 	private String commitOrigin = "Git";
 
 	private EventPersister eventPersister;
 
-	public Task(String userID, String repoPath, String targetCommitID) throws IOException {
+	public Task(String userID, String taskID, String repoPath, String targetCommitID) throws IOException {
 		this.userID = userID;
-		initRepositoryData(repoPath, targetCommitID);
-
+		this.taskID = taskID;
 		eventPersister = new EventPersister(taskID + " " + userID);
+		
+		initRepositoryData(repoPath, targetCommitID);
 	}
 
 	private final void initRepositoryData(String repoPath, String targetCommitID) throws IOException, MissingObjectException, IncorrectObjectTypeException, AmbiguousObjectException {
