@@ -12,3 +12,5 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.jgit;bundle-version="3.0.3"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
+Bundle-ClassPath: .,
+ thirdparty/json-simple-1.1.1.jar
