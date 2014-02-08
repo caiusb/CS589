@@ -25,7 +25,8 @@ public class Task implements Closeable{
 
 	private EventPersister eventPersister;
 
-	public Task(String repoPath, String targetCommitID) throws IOException {
+	public Task(String userID, String repoPath, String targetCommitID) throws IOException {
+		this.userID = userID;
 		initRepositoryData(repoPath, targetCommitID);
 
 		eventPersister = new EventPersister(taskID + " " + userID);
