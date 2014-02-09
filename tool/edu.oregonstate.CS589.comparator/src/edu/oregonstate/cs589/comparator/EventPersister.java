@@ -12,6 +12,7 @@ public class EventPersister {
 
 	private String fileName;
 	private JSONArray events;
+	private String commitDescription;
 
 	public EventPersister(String fileName) {
 		this.fileName = fileName;
@@ -24,12 +25,20 @@ public class EventPersister {
 
 	public void persistToFile() {
 		try {
-			Path filePath = Activator.getDefault().getLocalStoragePath().resolve(fileName);
-			System.err.println(filePath);
-			Files.write(filePath, events.toJSONString().getBytes(), StandardOpenOption.CREATE);
+			writeToFile(fileName + "_events", events.toJSONString());
+			writeToFile(fileName + "_commitDescription", commitDescription);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	private void writeToFile(String fileName, String contents) throws IOException {
+		Path descriptionFilePath = Activator.getDefault().getLocalStoragePath().resolve(fileName);
+		Files.write(descriptionFilePath, contents.getBytes(), StandardOpenOption.CREATE);
+	}
+
+	public void persistCommitDescription(String commitDescription) {
+		this.commitDescription = commitDescription;
 	}
 
 }

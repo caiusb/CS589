@@ -103,4 +103,9 @@ public class Task implements Closeable {
 		eventPersister.persistToFile();
 		repository.close();
 	}
+
+	public void recordCommitDescription(String text) {
+		eventPersister.persistCommitDescription(text);
+		
+	}
 }

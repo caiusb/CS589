@@ -88,6 +88,7 @@ public class CommitView extends ViewPart implements CommitViewSetter,
 
 			@Override
 			public void widgetSelected(SelectionEvent e) {
+				task.recordCommitDescription(commitDescription.getText());
 				task.recordTaskEnd();
 				close();
 			}
