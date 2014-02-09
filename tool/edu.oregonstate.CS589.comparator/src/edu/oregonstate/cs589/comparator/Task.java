@@ -23,7 +23,7 @@ public class Task implements Closeable {
 	private String taskID;
 	private String commitOrigin;
 
-	private EventPersister eventPersister;
+	private TaskDataPersister eventPersister;
 
 	public Task(String userID, String taskID, String commitOrigin,
 			String repoPath, String targetCommitID) throws IOException {
@@ -31,7 +31,7 @@ public class Task implements Closeable {
 		this.taskID = taskID;
 		this.commitOrigin = commitOrigin;
 
-		eventPersister = new EventPersister(userID + "_" + taskID);
+		eventPersister = new TaskDataPersister(userID + "_" + taskID);
 
 		initRepositoryData(repoPath, targetCommitID);
 	}
@@ -72,19 +72,19 @@ public class Task implements Closeable {
 	public void recordTaskStart() {
 		JSONObject obj = createCommonJSON(JSONConstants.EVENT_TASK_START);
 
-		eventPersister.persist(obj);
+		eventPersister.persistEvent(obj);
 	}
 
 	public void recordTaskEnd() {
 		JSONObject obj = createCommonJSON(JSONConstants.EVENT_TASK_END);
 
-		eventPersister.persist(obj);
+		eventPersister.persistEvent(obj);
 	}
 
 	public void recordDescriptionChange(String oldText, String newText) {
 		JSONObject obj = createCommonJSON(JSONConstants.EVENT_TYPE);
 
-		eventPersister.persist(obj);
+		eventPersister.persistEvent(obj);
 	}
 
 	private JSONObject createCommonJSON(String type) {
@@ -106,6 +106,6 @@ public class Task implements Closeable {
 
 	public void recordCommitDescription(String text) {
 		eventPersister.persistCommitDescription(text);
-		
+
 	}
 }
