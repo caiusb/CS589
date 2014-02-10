@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Comparator
 Bundle-SymbolicName: edu.oregonstate.CS589.comparator;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Bundle-Activator: edu.oregonstate.cs589.comparator.Activator
+Bundle-Activator: edu.oregonstate.cs589.comparator.rcp.Activator
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.core.resources;bundle-version="3.8.101",

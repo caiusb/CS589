@@ -8,6 +8,8 @@ import java.nio.file.StandardOpenOption;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import edu.oregonstate.cs589.comparator.rcp.Activator;
+
 public class TaskDataPersister {
 
 	private String rootFileName;

@@ -1,4 +1,4 @@
-package edu.oregonstate.cs589.comparator;
+package edu.oregonstate.cs589.comparator.rcp;
 
 import java.io.File;
 import java.io.IOException;

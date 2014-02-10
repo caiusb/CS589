@@ -1,4 +1,4 @@
-package edu.oregonstate.cs589.comparator;
+package edu.oregonstate.cs589.comparator.commitview;
 
 import java.io.IOException;
 
@@ -6,6 +6,10 @@ import org.eclipse.ui.IViewPart;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
+
+import edu.oregonstate.cs589.comparator.ManagedView;
+import edu.oregonstate.cs589.comparator.Task;
+import edu.oregonstate.cs589.comparator.ViewSpawner;
 
 public class CommitTaskSpawner implements ViewSpawner {
 

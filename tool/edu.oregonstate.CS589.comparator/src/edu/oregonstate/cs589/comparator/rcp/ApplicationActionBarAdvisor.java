@@ -1,4 +1,4 @@
-package edu.oregonstate.cs589.comparator;
+package edu.oregonstate.cs589.comparator.rcp;
 
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.ui.IWorkbenchWindow;

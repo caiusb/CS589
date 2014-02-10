@@ -1,4 +1,4 @@
-package edu.oregonstate.cs589.comparator;
+package edu.oregonstate.cs589.comparator.rcp;
 
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.ui.application.ActionBarAdvisor;
@@ -6,6 +6,8 @@ import org.eclipse.ui.application.IActionBarConfigurer;
 import org.eclipse.ui.application.IWorkbenchWindowConfigurer;
 import org.eclipse.ui.application.WorkbenchWindowAdvisor;
 import org.eclipse.ui.progress.UIJob;
+
+import edu.oregonstate.cs589.comparator.ViewSwitcher;
 
 public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor {
 

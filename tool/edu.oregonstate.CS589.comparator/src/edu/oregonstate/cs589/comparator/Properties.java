@@ -7,6 +7,8 @@ import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.List;
 
+import edu.oregonstate.cs589.comparator.rcp.Activator;
+
 public class Properties {
 
 	private static final String PROPERTIES_FILENAME = "properties";

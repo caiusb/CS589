@@ -9,6 +9,8 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.ui.progress.UIJob;
 
+import edu.oregonstate.cs589.comparator.commitview.CommitTaskSpawner;
+
 public class ViewSwitcher extends UIJob implements FinishCallback {
 
 	private List<ViewSpawner> viewSpawners;

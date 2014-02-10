@@ -1,4 +1,4 @@
-package edu.oregonstate.cs589.comparator;
+package edu.oregonstate.cs589.comparator.commitview;
 
 import java.io.IOException;
 
@@ -19,6 +19,10 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.ViewPart;
+
+import edu.oregonstate.cs589.comparator.FinishCallback;
+import edu.oregonstate.cs589.comparator.ManagedView;
+import edu.oregonstate.cs589.comparator.Task;
 
 public class CommitView extends ViewPart implements CommitViewSetter,
 		ManagedView {

@@ -1,4 +1,4 @@
-package edu.oregonstate.cs589.comparator;
+package edu.oregonstate.cs589.comparator.infoview;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.RowLayout;

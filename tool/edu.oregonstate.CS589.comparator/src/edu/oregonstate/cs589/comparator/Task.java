@@ -13,6 +13,8 @@ import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.revwalk.RevWalk;
 import org.json.simple.JSONObject;
 
+import edu.oregonstate.cs589.comparator.rcp.Activator;
+
 public class Task implements Closeable {
 
 	private Repository repository;
