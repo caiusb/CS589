@@ -50,8 +50,9 @@ public class CommitView extends ViewPart implements CommitViewSetter,
 		Label commiMessageLabel = new Label(rootComposite, SWT.NONE);
 		commiMessageLabel.setText("Commit message:");
 
-		commitMessage = new Text(rootComposite, SWT.BORDER);
+		commitMessage = new Text(rootComposite, SWT.BORDER | SWT.MULTI | SWT.WRAP | SWT.V_SCROLL);
 		commitMessage.setEditable(false);
+		addGridDataForText(commitMessage, 10);
 	}
 
 	private void addCommitDescription(Composite rootComposite) {
@@ -59,10 +60,7 @@ public class CommitView extends ViewPart implements CommitViewSetter,
 		commitDescriptionLabel.setText("Your commit description:");
 
 		commitDescription = new Text(rootComposite, SWT.V_SCROLL | SWT.MULTI);
-
-		GridData gridData = new GridData(SWT.FILL, SWT.CENTER, true, false);
-		gridData.heightHint = 15 * commitDescription.getLineHeight();
-		commitDescription.setLayoutData(gridData);
+		addGridDataForText(commitDescription, 15);
 
 		commitDescription.addModifyListener(new ModifyListener() {
 
@@ -78,6 +76,12 @@ public class CommitView extends ViewPart implements CommitViewSetter,
 				lastText = newText;
 			}
 		});
+	}
+
+	private void addGridDataForText(Text text, int lines) {
+		GridData gridData = new GridData(SWT.FILL, SWT.CENTER, true, false);
+		gridData.heightHint = lines * text.getLineHeight();
+		text.setLayoutData(gridData);
 	}
 
 	private void addNextCommitButton(Composite rootComposite) {
