@@ -15,6 +15,8 @@ public class DataProvider {
 
 	private List<Task> tasks;
 
+	private Task demoTask;
+
 	private static class Instance {
 		public static final DataProvider _instance = new DataProvider();
 	}
@@ -25,9 +27,11 @@ public class DataProvider {
 
 		try {
 			retrieveTasks();
+			demoTask = builtTaskFromString("demo");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
 	}
 
 	private final void retrieveTasks() throws IOException {
@@ -37,13 +41,20 @@ public class DataProvider {
 		String taskName = "T" + i;
 
 		while (properties.getProperty(taskName) != null) {
-			String[] repoData = properties.getProperty(taskName).trim().split(";");
-
-			tasks.add(new Task(userID, taskName, repoData[0], repoData[1], repoData[2]));
+			Task task = builtTaskFromString(taskName);
+			
+			tasks.add(task);
 
 			i++;
 			taskName = "T" + i;
 		}
+	}
+
+	private Task builtTaskFromString(String taskName) throws IOException {
+		String[] repoData = properties.getProperty(taskName).trim().split(";");
+
+		Task task = new Task(userID, taskName, repoData[0], repoData[1], repoData[2]);
+		return task;
 	}
 
 	public static DataProvider getInstance() {
@@ -53,5 +64,9 @@ public class DataProvider {
 	public List getTasks() {
 		Collections.shuffle(tasks);
 		return tasks;
+	}
+
+	public Task getDemoTask() {
+		return demoTask;
 	}
 }

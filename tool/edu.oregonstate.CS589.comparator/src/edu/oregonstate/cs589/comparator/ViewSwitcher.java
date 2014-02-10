@@ -27,11 +27,11 @@ public class ViewSwitcher extends UIJob implements FinishCallback {
 	public IStatus runInUIThread(IProgressMonitor monitor) {
 		
 		viewSpawners.add(new InfoViewSpawner("PLEASE WAIT until prompted to start demo.", "Start Demo"));
+		viewSpawners.add(new CommitTaskSpawner(DataProvider.getInstance().getDemoTask()));
 		
 		viewSpawners.add(new InfoViewSpawner("PLEASE WAIT until prompted to start practice task.", "Start Practice Task"));
 		
 		viewSpawners.add(new InfoViewSpawner("PLEASE WAIT until prompted to start the study tasks.", "Start Study"));
-		
 		addTasks();
 
 		viewSpawnerIterator = viewSpawners.iterator();
