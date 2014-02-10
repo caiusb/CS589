@@ -10,6 +10,7 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.ui.progress.UIJob;
 
 import edu.oregonstate.cs589.comparator.commitview.CommitTaskSpawner;
+import edu.oregonstate.cs589.comparator.infoview.InfoViewSpawner;
 
 public class ViewSwitcher extends UIJob implements FinishCallback {
 
@@ -24,18 +25,24 @@ public class ViewSwitcher extends UIJob implements FinishCallback {
 	@SuppressWarnings({ "unused", "restriction" })
 	@Override
 	public IStatus runInUIThread(IProgressMonitor monitor) {
-
-		List<Task> tasks = DataProvider.getInstance().getTasks();
-
-		for (Task task : tasks) {
-			viewSpawners.add(new CommitTaskSpawner(task));
-		}
+		
+		viewSpawners.add(new InfoViewSpawner("PLEASE WAIT until prompted to start demo.", "Start Demo"));
+		
+		addTasks();
 
 		viewSpawnerIterator = viewSpawners.iterator();
 
 		spawnNextView();
 
 		return Status.OK_STATUS;
+	}
+
+	private void addTasks() {
+		List<Task> tasks = DataProvider.getInstance().getTasks();
+
+		for (Task task : tasks) {
+			viewSpawners.add(new CommitTaskSpawner(task));
+		}
 	}
 
 	private void spawnNextView() {
