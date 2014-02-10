@@ -24,7 +24,13 @@
       <view
             class="edu.oregonstate.cs589.comparator.CommitView"
             id="edu.oregonstate.CS589.comparator.commitView"
-            name="name"
+            name="Commit View"
+            restorable="true">
+      </view>
+      <view
+            class="edu.oregonstate.cs589.comparator.ViewPart1"
+            id="edu.oregonstate.CS589.comparator.infoView"
+            name="Info View"
             restorable="true">
       </view>
    </extension>
