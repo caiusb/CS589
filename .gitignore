@@ -2,4 +2,4 @@
 /tool/.metadata
 .metadata
 bin
-/tool/edu.oregonstate.CS589.comparator/testData/repos/*
+/tool/edu.oregonstate.CS589.comparator/repos/*
