@@ -30,7 +30,6 @@ public class DataProvider {
 
 		try {
 			retrieveTasks();
-			demoTask = builtTaskFromString("demo");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -38,8 +37,28 @@ public class DataProvider {
 	}
 
 	private final void retrieveTasks() throws IOException {
+		String rootRepoPath = "repos";
+		String s = File.separator;
+
 		tasks = new ArrayList<>();
 
+		demoTask = (new Task(userID, "demo", "SVN", rootRepoPath + s + "clientRecorder" + s + ".git", "f3c9d1de5c583c95fecd56e66de8a1c84bf8cf40"));
+		
+		tasks.add(new Task(userID, "T01", "SVN", rootRepoPath + s + "P" + s + ".git", "040d292f2ea983a918bd5be9d0242c5dcfff9f38"));
+		tasks.add(new Task(userID, "T02", "SVN", rootRepoPath + s + "P" + s + ".git", "1dfed3f41204035f0e6ec29ccf69d55a44274e35"));
+		
+		
+		/*tasks.add(new Task(userID, "T01", "SVN", rootRepoPath + s + "davmail" + s + ".git", ""));
+		tasks.add(new Task(userID, "T02", "SVN", rootRepoPath + s + "freecol" + s + ".git", ""));
+		tasks.add(new Task(userID, "T03", "SVN", rootRepoPath + s + "omegat" + s + ".git", ""));
+		
+		tasks.add(new Task(userID, "T04", "Git", rootRepoPath + s + "ActionBarSherlock" + s + ".git", ""));
+		tasks.add(new Task(userID, "T05", "Git", rootRepoPath + s + "elasticsearch" + s + ".git", ""));
+		tasks.add(new Task(userID, "T06", "Git", rootRepoPath + s + "incubator-storm" + s + ".git", ""));*/
+		
+	}
+
+	private void loadTasksFromProperties() throws IOException {
 		int i = 1;
 		String taskName = "T" + i;
 
