@@ -44,17 +44,13 @@ public class DataProvider {
 
 		demoTask = (new Task(userID, "demo", "SVN", rootRepoPath + s + "clientRecorder" + s + ".git", "f3c9d1de5c583c95fecd56e66de8a1c84bf8cf40"));
 		
-		tasks.add(new Task(userID, "T01", "SVN", rootRepoPath + s + "P" + s + ".git", "040d292f2ea983a918bd5be9d0242c5dcfff9f38"));
-		tasks.add(new Task(userID, "T02", "SVN", rootRepoPath + s + "P" + s + ".git", "1dfed3f41204035f0e6ec29ccf69d55a44274e35"));
+		tasks.add(new Task(userID, "T01", "SVN", rootRepoPath + s + "davmail" + s + ".git", "afd4e9539be4181781c2700d780175ad2b294795"));
+		tasks.add(new Task(userID, "T02", "SVN", rootRepoPath + s + "vassal" + s + ".git", "1c06a1d92028995868f9b9e54b063ac472442a3b"));
+		tasks.add(new Task(userID, "T03", "SVN", rootRepoPath + s + "jmol" + s + ".git", "cb0a86672b9aac08f60ec62ef274f7e8ed80152e"));
 		
-		
-		/*tasks.add(new Task(userID, "T01", "SVN", rootRepoPath + s + "davmail" + s + ".git", ""));
-		tasks.add(new Task(userID, "T02", "SVN", rootRepoPath + s + "freecol" + s + ".git", ""));
-		tasks.add(new Task(userID, "T03", "SVN", rootRepoPath + s + "omegat" + s + ".git", ""));
-		
-		tasks.add(new Task(userID, "T04", "Git", rootRepoPath + s + "ActionBarSherlock" + s + ".git", ""));
-		tasks.add(new Task(userID, "T05", "Git", rootRepoPath + s + "elasticsearch" + s + ".git", ""));
-		tasks.add(new Task(userID, "T06", "Git", rootRepoPath + s + "incubator-storm" + s + ".git", ""));*/
+		tasks.add(new Task(userID, "T04", "Git", rootRepoPath + s + "ActionBarSherlock" + s + ".git", "0f07d2dde53d1445addbebf440c29dc5adbcf539"));
+		tasks.add(new Task(userID, "T05", "Git", rootRepoPath + s + "elasticsearch" + s + ".git", "b591d7fef71b53ec1e6123787a913bb1115e10f2"));
+		tasks.add(new Task(userID, "T06", "Git", rootRepoPath + s + "SlidingMenu" + s + ".git", "1c1d8df60f47081b60e7f678c3b28f5f862fd76d"));
 		
 	}
 
