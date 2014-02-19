@@ -44,7 +44,7 @@ public class DataProvider {
 
 		tasks = new ArrayList<>();
 
-		demoTask = (new Task(userID, "demo", "Git", rootRepoPath + s + "Android-ViewPagerIndicator" + s + ".git", "e9ad47e20497cccb61258368ae27bdd9f0eb146c"));
+		demoTask = (new Task(userID, "demo", "Git", rootRepoPath + s + "demo" + s + ".git", "2089a6aa7bd5337707456f03efee81bb9883e3c8"));
 		
 		practiceTask = new Task(userID, "practice", "Git", rootRepoPath + s + "Android-ViewPagerIndicator" + s + ".git", "e9ad47e20497cccb61258368ae27bdd9f0eb146c");
 		
