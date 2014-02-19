@@ -74,16 +74,8 @@ public class Activator extends AbstractUIPlugin {
 	}
 
 	public File getProjectFile(String filePath) {
-		Path path = new Path(filePath);
-		URL url = FileLocator.find(getBundle(), path, Collections.EMPTY_MAP);
-		URL fileUrl = null;
-		try {
-			fileUrl = FileLocator.toFileURL(url);
-		} catch (IOException e) {
-			// Will happen if the file cannot be read for some reason
-			e.printStackTrace();
-		}
-		return new File(fileUrl.getPath());
+		
+		return new File(filePath);
 	}
 
 	public java.nio.file.Path getLocalStoragePath() {

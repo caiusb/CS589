@@ -14,3 +14,9 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .,
  thirdparty/json-simple-1.1.1.jar
+Export-Package: edu.oregonstate.cs589.comparator,
+ edu.oregonstate.cs589.comparator.commitview,
+ edu.oregonstate.cs589.comparator.infoview,
+ edu.oregonstate.cs589.comparator.rcp,
+ org.json.simple,
+ org.json.simple.parser

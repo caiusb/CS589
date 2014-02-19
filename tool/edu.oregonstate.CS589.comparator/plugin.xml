@@ -34,5 +34,17 @@
             restorable="true">
       </view>
    </extension>
+   <extension
+         id="CommitViewer"
+         point="org.eclipse.core.runtime.products">
+      <product
+            application="edu.oregonstate.CS589.comparator.application"
+            name="Commit Viewer">
+         <property
+               name="appName"
+               value="Commit Viewer">
+         </property>
+      </product>
+   </extension>
 
 </plugin>
