@@ -12,8 +12,6 @@ public class DataProvider {
 
 	private static final String USER_ID = "userID";
 
-	private Properties properties;
-
 	private String userID;
 	private Task demoTask;
 	private String rootReposPath;
@@ -26,9 +24,7 @@ public class DataProvider {
 	}
 
 	private DataProvider() {
-		properties = new Properties();
-		userID = properties.getProperty(USER_ID);
-		rootReposPath = properties.getProperty(ROOT_REPOS_PATH);
+		userID = getUserID();
 
 		try {
 			retrieveTasks();
@@ -36,6 +32,11 @@ public class DataProvider {
 			e.printStackTrace();
 		}
 		
+	}
+
+	private String getUserID() {
+		return System.currentTimeMillis() + "";
+		//return properties.getProperty(USER_ID);
 	}
 
 	private final void retrieveTasks() throws IOException {
@@ -58,30 +59,30 @@ public class DataProvider {
 		
 	}
 
-	private void loadTasksFromProperties() throws IOException {
-		int i = 1;
-		String taskName = "T" + i;
-
-		while (properties.getProperty(taskName) != null) {
-			Task task = builtTaskFromString(taskName);
-			
-			tasks.add(task);
-
-			i++;
-			taskName = "T" + i;
-		}
-	}
-
-	private Task builtTaskFromString(String taskName) throws IOException {
-		String[] repoData = properties.getProperty(taskName).trim().split(";");
-
-		String commitOrigin = repoData[0];
-		String repoPath = rootReposPath + File.separator + repoData[1] + File.separator + ".git";
-		String commitID = repoData[2];
-
-		Task task = new Task(userID, taskName, commitOrigin, repoPath, commitID);
-		return task;
-	}
+//	private void loadTasksFromProperties() throws IOException {
+//		int i = 1;
+//		String taskName = "T" + i;
+//
+//		while (properties.getProperty(taskName) != null) {
+//			Task task = builtTaskFromString(taskName);
+//			
+//			tasks.add(task);
+//
+//			i++;
+//			taskName = "T" + i;
+//		}
+//	}
+//
+//	private Task builtTaskFromString(String taskName) throws IOException {
+//		String[] repoData = properties.getProperty(taskName).trim().split(";");
+//
+//		String commitOrigin = repoData[0];
+//		String repoPath = rootReposPath + File.separator + repoData[1] + File.separator + ".git";
+//		String commitID = repoData[2];
+//
+//		Task task = new Task(userID, taskName, commitOrigin, repoPath, commitID);
+//		return task;
+//	}
 
 	public static DataProvider getInstance() {
 		return Instance._instance;
