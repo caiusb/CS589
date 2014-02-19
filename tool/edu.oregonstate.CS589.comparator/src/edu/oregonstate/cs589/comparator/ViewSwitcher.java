@@ -34,6 +34,8 @@ public class ViewSwitcher extends UIJob implements FinishCallback {
 		
 		viewSpawners.add(new InfoViewSpawner("Press the button below to proceed with the study tasks", "Start Study"));
 		addTasks();
+		
+		viewSpawners.add(new InfoViewSpawner("Thank you for participating in our study!", "Exit"));
 
 		viewSpawnerIterator = viewSpawners.iterator();
 
