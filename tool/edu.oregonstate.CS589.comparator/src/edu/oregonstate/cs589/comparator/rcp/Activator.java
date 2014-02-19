@@ -6,9 +6,12 @@ import java.net.URL;
 import java.util.Collections;
 
 import org.eclipse.core.runtime.FileLocator;
-import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Platform;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 
 /**
@@ -80,5 +83,9 @@ public class Activator extends AbstractUIPlugin {
 
 	public java.nio.file.Path getLocalStoragePath() {
 		return getStateLocation().toFile().toPath();
+	}
+	
+	public void log(Exception e){
+		getLog().log(new Status(0, PLUGIN_ID, e.getMessage(), e));
 	}
 }
