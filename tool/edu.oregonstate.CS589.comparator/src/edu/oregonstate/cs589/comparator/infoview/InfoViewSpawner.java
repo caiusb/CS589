@@ -8,7 +8,7 @@ import edu.oregonstate.cs589.comparator.ManagedView;
 import edu.oregonstate.cs589.comparator.ViewSpawner;
 
 //TODO Code duplication with CommitViewSetter
-public class InfoViewSpawner implements ViewSpawner{
+public class InfoViewSpawner implements ViewSpawner {
 
 	private String message;
 	private String buttonMessage;
@@ -17,7 +17,7 @@ public class InfoViewSpawner implements ViewSpawner{
 		this.message = message;
 		this.buttonMessage = buttonMessage;
 	}
-	
+
 	@Override
 	public ManagedView spawnView() throws Exception {
 		String viewId = InfoView.ID;

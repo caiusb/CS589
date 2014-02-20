@@ -2,8 +2,6 @@ package edu.oregonstate.cs589.comparator.commitview;
 
 import java.io.IOException;
 
-import javax.security.auth.callback.LanguageCallback;
-
 import org.eclipse.compare.CompareUI;
 import org.eclipse.egit.ui.internal.merge.GitCompareEditorInput;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -64,9 +62,8 @@ public class CommitView extends ViewPart implements CommitViewSetter,
 		Font font = timeOutLabel.getFont();
 		FontData[] fontData = font.getFontData();
 		fontData[0].setHeight(20);
-		//fontData[0].setStyle(SWT.BOLD);
+		// fontData[0].setStyle(SWT.BOLD);
 		timeOutLabel.setFont(new Font(display, fontData[0]));
-
 
 		final int minutesTimeStep = 1;
 		final int millisecondTimeStep = 1000;
@@ -86,7 +83,7 @@ public class CommitView extends ViewPart implements CommitViewSetter,
 					close();
 					return;
 				}
-				
+
 				timeOutLabel.setText(minutes + " minutes remaining");
 
 				display.timerExec(millisecondTimeStep, this);
@@ -185,7 +182,7 @@ public class CommitView extends ViewPart implements CommitViewSetter,
 		try {
 			task.recordCommitDescription(commitDescription.getText());
 			task.recordTaskEnd();
-			
+
 			task.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
