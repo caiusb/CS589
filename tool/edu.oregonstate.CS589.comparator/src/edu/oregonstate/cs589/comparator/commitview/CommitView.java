@@ -65,10 +65,13 @@ public class CommitView extends ViewPart implements CommitViewSetter,
 		fontData[0].setHeight(20);
 		timeOutLabel.setFont(new Font(Display.getCurrent(), fontData[0]));
 
-		final int minutesTotal = 10;
+		int minutesTotal = 10;
 
-		final Display display2 = Display.getCurrent();
-		
+		initTimeout(minutesTotal);
+	}
+
+	private void initTimeout(final int minutesTotal) {
+		final Display display = Display.getCurrent();
 		final int minutesTimeStep = 1;
 		final int millisecondTimeStep = 1000;
 
@@ -82,18 +85,18 @@ public class CommitView extends ViewPart implements CommitViewSetter,
 				minutes -= minutesTimeStep;
 
 				if (minutes == 0) {
-					MessageDialog.openInformation(display2.getActiveShell(), "Time out", "The time has run out. Next task will start when you press OK");
+					MessageDialog.openInformation(display.getActiveShell(), "Time out", "The time has run out. Next task will start when you press OK");
 					close();
 					return;
 				}
 
 				timeOutLabel.setText(minutes + " minutes remaining");
 
-				display2.timerExec(millisecondTimeStep, this);
+				display.timerExec(millisecondTimeStep, this);
 			}
 		};
 
-		display2.timerExec(millisecondTimeStep, timer);
+		display.timerExec(millisecondTimeStep, timer);
 	}
 
 	private void addCommiMessage(Composite rootComposite) {
