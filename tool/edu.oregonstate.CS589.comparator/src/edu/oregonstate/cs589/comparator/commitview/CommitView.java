@@ -38,6 +38,8 @@ public class CommitView extends ViewPart implements CommitViewSetter,
 
 	private FinishCallback finishCallback;
 
+	private Label timeOutLabel;
+
 	public CommitView() {
 	}
 
@@ -56,8 +58,7 @@ public class CommitView extends ViewPart implements CommitViewSetter,
 	}
 
 	private void addTimeOutInfo(Composite rootComposite) {
-		final Display display = Display.getCurrent();
-		final Label timeOutLabel = new Label(rootComposite, SWT.BOLD);
+		timeOutLabel = new Label(rootComposite, SWT.BOLD);
 
 		Font font = timeOutLabel.getFont();
 		FontData[] fontData = font.getFontData();
