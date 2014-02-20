@@ -58,37 +58,40 @@ public class CommitView extends ViewPart implements CommitViewSetter,
 
 	private void addTimeOutInfo(Composite rootComposite) {
 		final Display display = Display.getCurrent();
-		final int step = 1;
-		final int minutesTotal = 15;
-
 		final Label timeOutLabel = new Label(rootComposite, SWT.BOLD);
-		timeOutLabel.setText(minutesTotal + " minutes remaining");
 
 		Font font = timeOutLabel.getFont();
 		FontData[] fontData = font.getFontData();
-
 		fontData[0].setHeight(20);
 		fontData[0].setStyle(SWT.BOLD);
-
 		timeOutLabel.setFont(new Font(display, fontData[0]));
 
+
+		final int minutesTimeStep = 1;
+		final int millisecondTimeStep = 1000;
+		final int minutesTotal = 5;
+
+		timeOutLabel.setText(minutesTotal + " minutes remaining");
+
 		final Runnable timer = new Runnable() {
-			
+
 			int minutes = minutesTotal;
-			
+
 			public void run() {
-				if (timeOutLabel.isDisposed())
+				minutes -= minutesTimeStep;
+
+				if (minutes == 0) {
+					close();
 					return;
-				
-				minutes -= step;
+				}
 				
 				timeOutLabel.setText(minutes + " minutes remaining");
-				
-				display.timerExec(1000, this);
+
+				display.timerExec(millisecondTimeStep, this);
 			}
 		};
-		
-		display.timerExec(step, timer);
+
+		display.timerExec(millisecondTimeStep, timer);
 	}
 
 	private void addCommiMessage(Composite rootComposite) {
