@@ -177,7 +177,11 @@ public class CommitView extends ViewPart implements CommitViewSetter,
 				GitCompareEditorInput compareEditorInput = new GitCompareEditorInput(task.getTargetCommitID(), task.getParentCommitID(), task.getRepository());
 				CompareUI.openCompareEditor(compareEditorInput, true);
 
-				initTimeout(task.getTaskTimeOutInMinutes());
+				int taskTimeOutInMinutes = task.getTaskTimeOutInMinutes();
+				
+				if (taskTimeOutInMinutes > 0) {
+					initTimeout(taskTimeOutInMinutes);
+				}
 			}
 		});
 
