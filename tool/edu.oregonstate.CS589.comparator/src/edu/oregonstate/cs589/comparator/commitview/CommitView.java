@@ -64,13 +64,13 @@ public class CommitView extends ViewPart implements CommitViewSetter,
 		Font font = timeOutLabel.getFont();
 		FontData[] fontData = font.getFontData();
 		fontData[0].setHeight(20);
-		fontData[0].setStyle(SWT.BOLD);
+		//fontData[0].setStyle(SWT.BOLD);
 		timeOutLabel.setFont(new Font(display, fontData[0]));
 
 
 		final int minutesTimeStep = 1;
 		final int millisecondTimeStep = 1000;
-		final int minutesTotal = 5;
+		final int minutesTotal = 10;
 
 		timeOutLabel.setText(minutesTotal + " minutes remaining");
 
