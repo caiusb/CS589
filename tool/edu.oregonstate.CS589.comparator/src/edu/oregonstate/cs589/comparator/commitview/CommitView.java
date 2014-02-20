@@ -137,8 +137,6 @@ public class CommitView extends ViewPart implements CommitViewSetter,
 
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				task.recordCommitDescription(commitDescription.getText());
-				task.recordTaskEnd();
 				close();
 			}
 
@@ -180,6 +178,9 @@ public class CommitView extends ViewPart implements CommitViewSetter,
 
 	public void close() {
 		try {
+			task.recordCommitDescription(commitDescription.getText());
+			task.recordTaskEnd();
+			
 			task.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
