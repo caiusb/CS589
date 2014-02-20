@@ -182,6 +182,10 @@ public class CommitView extends ViewPart implements CommitViewSetter,
 				if (taskTimeOutInMinutes > 0) {
 					initTimeout(taskTimeOutInMinutes);
 				}
+				else {
+					timeOutLabel.setText("No time out for demo task");
+					timeOutLabel.pack(true);
+				}
 			}
 		});
 
