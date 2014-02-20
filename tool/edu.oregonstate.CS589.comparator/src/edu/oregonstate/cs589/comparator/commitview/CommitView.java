@@ -64,10 +64,6 @@ public class CommitView extends ViewPart implements CommitViewSetter,
 		FontData[] fontData = font.getFontData();
 		fontData[0].setHeight(20);
 		timeOutLabel.setFont(new Font(Display.getCurrent(), fontData[0]));
-
-		int minutesTotal = 10;
-
-		initTimeout(minutesTotal);
 	}
 
 	private void initTimeout(final int minutesTotal) {
@@ -97,6 +93,8 @@ public class CommitView extends ViewPart implements CommitViewSetter,
 		};
 
 		display.timerExec(millisecondTimeStep, timer);
+
+		timeOutLabel.pack(true);
 	}
 
 	private void addCommiMessage(Composite rootComposite) {
@@ -178,6 +176,8 @@ public class CommitView extends ViewPart implements CommitViewSetter,
 
 				GitCompareEditorInput compareEditorInput = new GitCompareEditorInput(task.getTargetCommitID(), task.getParentCommitID(), task.getRepository());
 				CompareUI.openCompareEditor(compareEditorInput, true);
+
+				initTimeout(task.getTaskTimeOutInMinutes());
 			}
 		});
 

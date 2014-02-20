@@ -24,14 +24,31 @@ public class Task implements Closeable {
 	private String userID;
 	private String taskID;
 	private String commitOrigin;
+	private int taskTimeInMinutes;
 
 	private TaskDataPersister eventPersister;
 
+	/**
+	 * assumes a task time of 15 minutes
+	 * @param userID
+	 * @param taskID
+	 * @param commitOrigin
+	 * @param repoPath
+	 * @param targetCommitID
+	 * @throws IOException
+	 */
 	public Task(String userID, String taskID, String commitOrigin,
 			String repoPath, String targetCommitID) throws IOException {
+		this(userID, taskID, commitOrigin, repoPath, targetCommitID, 15);
+	}
+
+	public Task(String userID, String taskID, String commitOrigin,
+			String repoPath, String targetCommitID, int taskTimeInMinutes)
+			throws IOException {
 		this.userID = userID;
 		this.taskID = taskID;
 		this.commitOrigin = commitOrigin;
+		this.taskTimeInMinutes = taskTimeInMinutes;
 
 		eventPersister = new TaskDataPersister(userID + "_" + taskID);
 
@@ -109,5 +126,9 @@ public class Task implements Closeable {
 	public void recordCommitDescription(String text) {
 		eventPersister.persistCommitDescription(text);
 
+	}
+
+	public int getTaskTimeOutInMinutes() {
+		return taskTimeInMinutes;
 	}
 }
