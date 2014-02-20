@@ -2,6 +2,8 @@ package edu.oregonstate.cs589.comparator.commitview;
 
 import java.io.IOException;
 
+import javax.security.auth.callback.LanguageCallback;
+
 import org.eclipse.compare.CompareUI;
 import org.eclipse.egit.ui.internal.merge.GitCompareEditorInput;
 import org.eclipse.swt.SWT;
@@ -9,6 +11,8 @@ import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.graphics.Font;
+import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
@@ -47,7 +51,22 @@ public class CommitView extends ViewPart implements CommitViewSetter,
 
 		addCommitDescription(rootComposite);
 
+		addTimeOutInfo(rootComposite);
+
 		addNextCommitButton(rootComposite);
+	}
+
+	private void addTimeOutInfo(Composite rootComposite) {
+		Label timeOutLabel = new Label(rootComposite, SWT.BOLD);
+		timeOutLabel.setText("15 minutes remaining");
+		
+		Font font = timeOutLabel.getFont();
+		FontData[] fontData = font.getFontData();
+		
+		fontData[0].setHeight(20);
+		fontData[0].setStyle(SWT.BOLD);
+		
+		timeOutLabel.setFont(new Font(Display.getCurrent(), fontData[0]));
 	}
 
 	private void addCommiMessage(Composite rootComposite) {
