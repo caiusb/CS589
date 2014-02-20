@@ -10,6 +10,6 @@ public class JSONConstants {
 
 	public static final String EVENT_TASK_START = "taskStart";
 	public static final String EVENT_TASK_END = "taskEnd";
-	public static final String EVENT_TYPE = "type";
+	public static final String EVENT_DESCRIPTION_TYPE = "type";
 
 }

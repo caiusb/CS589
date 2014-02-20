@@ -57,8 +57,8 @@ public class ViewSwitcher extends UIJob implements FinishCallback {
 
 			if (viewSpawnerIterator.hasNext()) {
 				ViewSpawner viewSpawner = viewSpawnerIterator.next();
-				ManagedView view = viewSpawner.spawnView();
-				view.addFinishCallback(this);
+				ManagedView spawnedView = viewSpawner.spawnView();
+				spawnedView.addFinishCallback(this);
 			}
 
 		} catch (Exception e) {

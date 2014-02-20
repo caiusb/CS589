@@ -60,7 +60,6 @@ public class Task implements Closeable {
 		repository = new FileRepository(repoFile);
 
 		RevWalk rw = new RevWalk(repository);
-		System.out.println(repository.getAllRefs());
 
 		targetCommit = rw.parseCommit(repository.resolve(targetCommitID));
 
@@ -101,13 +100,14 @@ public class Task implements Closeable {
 	}
 
 	public void recordDescriptionChange(String oldText, String newText) {
-		JSONObject obj = createCommonJSON(JSONConstants.EVENT_TYPE);
+		JSONObject obj = createCommonJSON(JSONConstants.EVENT_DESCRIPTION_TYPE);
 
 		eventPersister.persistEvent(obj);
 	}
 
 	private JSONObject createCommonJSON(String type) {
 		JSONObject obj = new JSONObject();
+		
 		obj.put(JSONConstants.JSON_USER_ID, userID);
 		obj.put(JSONConstants.JSON_TASK_ID, taskID);
 		obj.put(JSONConstants.JSON_COMMIT_ORIGIN, commitOrigin);
