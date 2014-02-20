@@ -6,6 +6,7 @@ import javax.security.auth.callback.LanguageCallback;
 
 import org.eclipse.compare.CompareUI;
 import org.eclipse.egit.ui.internal.merge.GitCompareEditorInput;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
@@ -81,6 +82,7 @@ public class CommitView extends ViewPart implements CommitViewSetter,
 				minutes -= minutesTimeStep;
 
 				if (minutes == 0) {
+					MessageDialog.openInformation(display.getActiveShell(), "Time out", "The time has run out. Next task will start when you press OK");
 					close();
 					return;
 				}
