@@ -2,16 +2,15 @@ package edu.oregonstate.cs589.comparator.rcp;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Collections;
 
 import org.eclipse.core.runtime.FileLocator;
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Platform;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
-import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 
 /**
@@ -77,15 +76,36 @@ public class Activator extends AbstractUIPlugin {
 	}
 
 	public File getProjectFile(String filePath) {
+		File repo = null;
 		
-		return new File(filePath);
+		try {
+			URL bundleRoot = getBundle().getEntry("/");  
+			URL fileURL = FileLocator.toFileURL(bundleRoot);
+			File bundleFile = new File(fileURL.toURI().getRawPath());
+			
+			log("bundle file: " + bundleFile.getAbsolutePath());
+			
+			repo = new File(bundleFile, filePath);
+			
+			log("repo file: " + repo.getAbsolutePath());
+			
+			log("repo exists: " + repo.exists());
+		} catch (IOException | URISyntaxException e) {
+			e.printStackTrace();
+		}  
+		
+		return repo;
 	}
 
 	public java.nio.file.Path getLocalStoragePath() {
 		return getStateLocation().toFile().toPath();
 	}
-	
-	public void log(Exception e){
+
+	public void log(Exception e) {
 		getLog().log(new Status(0, PLUGIN_ID, e.getMessage(), e));
+	}
+	
+	public void log(String message) {
+		getLog().log(new Status(0, PLUGIN_ID, message));
 	}
 }

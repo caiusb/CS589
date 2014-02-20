@@ -1,33 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="Commit Viewer" uid="CommitViewer" id="edu.oregonstate.CS589.comparator.CommitViewer" application="edu.oregonstate.CS589.comparator.application" useFeatures="false" includeLaunchers="true">
-
+<product name="Commit Viewer" uid="Product" id="edu.oregonstate.CS589.comparator.CommitViewer" application="edu.oregonstate.CS589.comparator.application" version="1.0.0.qualifier" useFeatures="true" includeLaunchers="true">
 
    <configIni use="default">
    </configIni>
 
    <launcherArgs>
-      <programArgs>-consoleLog</programArgs>
-      <vmArgs>-Dosgi.requiredJavaVersion=1.6 -Xms40m -Xmx512m</vmArgs>
       <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts</vmArgsMac>
    </launcherArgs>
 
    <windowImages/>
 
-
-   <launcher name="Commit Viewer">
+   <launcher>
       <solaris/>
       <win useIco="false">
          <bmp/>
       </win>
    </launcher>
 
-
    <vm>
       <windows include="true">org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JRE-1.1</windows>
    </vm>
-
 
    <plugins>
       <plugin id="com.ibm.icu"/>
@@ -36,12 +30,10 @@
       <plugin id="javaewah"/>
       <plugin id="javax.annotation"/>
       <plugin id="javax.inject"/>
-      <plugin id="javax.servlet"/>
       <plugin id="javax.xml"/>
       <plugin id="org.apache.batik.css"/>
       <plugin id="org.apache.batik.util"/>
       <plugin id="org.apache.batik.util.gui"/>
-      <plugin id="org.eclipse.ant.core"/>
       <plugin id="org.eclipse.compare"/>
       <plugin id="org.eclipse.compare.core"/>
       <plugin id="org.eclipse.core.commands"/>
@@ -59,11 +51,8 @@
       <plugin id="org.eclipse.core.resources"/>
       <plugin id="org.eclipse.core.resources.win32.x86_64" fragment="true"/>
       <plugin id="org.eclipse.core.runtime"/>
-      <plugin id="org.eclipse.core.runtime.compatibility.auth"/>
       <plugin id="org.eclipse.core.runtime.compatibility.registry" fragment="true"/>
       <plugin id="org.eclipse.core.variables"/>
-      <plugin id="org.eclipse.debug.core"/>
-      <plugin id="org.eclipse.debug.ui"/>
       <plugin id="org.eclipse.e4.core.commands"/>
       <plugin id="org.eclipse.e4.core.contexts"/>
       <plugin id="org.eclipse.e4.core.di"/>
@@ -110,18 +99,14 @@
       <plugin id="org.eclipse.jgit"/>
       <plugin id="org.eclipse.jsch.core"/>
       <plugin id="org.eclipse.jsch.ui"/>
-      <plugin id="org.eclipse.ltk.core.refactoring"/>
-      <plugin id="org.eclipse.ltk.ui.refactoring"/>
       <plugin id="org.eclipse.osgi"/>
       <plugin id="org.eclipse.osgi.services"/>
-      <plugin id="org.eclipse.search"/>
       <plugin id="org.eclipse.swt"/>
       <plugin id="org.eclipse.swt.win32.win32.x86_64" fragment="true"/>
       <plugin id="org.eclipse.team.core"/>
       <plugin id="org.eclipse.team.ui"/>
       <plugin id="org.eclipse.text"/>
       <plugin id="org.eclipse.ui"/>
-      <plugin id="org.eclipse.ui.console"/>
       <plugin id="org.eclipse.ui.editors"/>
       <plugin id="org.eclipse.ui.forms"/>
       <plugin id="org.eclipse.ui.ide"/>
@@ -135,11 +120,9 @@
       <plugin id="org.w3c.dom.svg"/>
    </plugins>
 
-   <configurations>
-      <plugin id="org.eclipse.core.runtime" autoStart="true" startLevel="0" />
-      <plugin id="org.eclipse.equinox.common" autoStart="true" startLevel="2" />
-      <plugin id="org.eclipse.equinox.ds" autoStart="true" startLevel="1" />
-      <plugin id="org.eclipse.osgi" autoStart="true" startLevel="-1" />
-   </configurations>
+   <features>
+      <feature id="edu.oregonstate.CS589.comparator.feature" version="1.0.0.qualifier"/>
+   </features>
+
 
 </product>

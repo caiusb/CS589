@@ -41,7 +41,7 @@ public class DataProvider {
 
 	private final void retrieveTasks() throws IOException {
 		String rootRepoPath = "repos";
-		String s = File.separator;
+		String s = "/";
 
 		tasks = new ArrayList<>();
 

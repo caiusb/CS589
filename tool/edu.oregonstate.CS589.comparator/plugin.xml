@@ -46,5 +46,13 @@
          </property>
       </product>
    </extension>
+   <extension
+         id="product"
+         point="org.eclipse.core.runtime.products">
+      <product
+            application="edu.oregonstate.CS589.comparator.application"
+            name="Commit Viewer">
+      </product>
+   </extension>
 
 </plugin>
