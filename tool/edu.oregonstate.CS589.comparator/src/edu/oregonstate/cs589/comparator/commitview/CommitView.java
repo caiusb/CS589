@@ -69,7 +69,7 @@ public class CommitView extends ViewPart implements CommitViewSetter,
 	private void initTimeout(final int minutesTotal) {
 		final Display display = Display.getCurrent();
 		final int minutesTimeStep = 1;
-		final int millisecondTimeStep = 1000;
+		final int millisecondTimeStep = 60000;
 
 		timeOutLabel.setText(minutesTotal + " minutes remaining");
 
