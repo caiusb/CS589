@@ -44,9 +44,9 @@ public class DataProvider {
 
 		tasks = new ArrayList<>();
 
-		demoTask = (new Task(userID, "demo", "Git", rootRepoPath + s + "demo" + s + ".git", "2089a6aa7bd5337707456f03efee81bb9883e3c8"));
+		demoTask = (new Task(userID, "demo", "Git", rootRepoPath + s + "demo" + s + ".git", "2089a6aa7bd5337707456f03efee81bb9883e3c8", 0));
 
-		practiceTask = new Task(userID, "practice", "Git", rootRepoPath + s + "Android-ViewPagerIndicator" + s + ".git", "e9ad47e20497cccb61258368ae27bdd9f0eb146c");
+		practiceTask = new Task(userID, "practice", "Git", rootRepoPath + s + "Android-ViewPagerIndicator" + s + ".git", "e9ad47e20497cccb61258368ae27bdd9f0eb146c", 10);
 
 		tasks.add(new Task(userID, "T01", "SVN", rootRepoPath + s + "davmail" + s + ".git", "afd4e9539be4181781c2700d780175ad2b294795"));
 		tasks.add(new Task(userID, "T02", "SVN", rootRepoPath + s + "vassal" + s + ".git", "1c06a1d92028995868f9b9e54b063ac472442a3b"));
