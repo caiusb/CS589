@@ -49,7 +49,7 @@ public class DataProvider {
 		practiceTask = new Task(userID, "practice", "Git", rootRepoPath + s + "Android-ViewPagerIndicator-slim" + s + ".git", "efb8baf11975e319e29fb0b9cbd0158e50f58659", 10);
 
 		tasks.add(new Task(userID, "T01", "SVN", rootRepoPath + s + "davmail-slim" + s + ".git", "d84e4595b39daad12f6ff8da0a888b0fc9a8e3e5"));
-		tasks.add(new Task(userID, "T02", "SVN", rootRepoPath + s + "vassal" + s + ".git", "1c06a1d92028995868f9b9e54b063ac472442a3b"));
+		tasks.add(new Task(userID, "T02", "SVN", rootRepoPath + s + "vassal-slim" + s + ".git", "7cb59e5b1fda9d4f3fa0b4c916a681d5bd41bb52"));
 		tasks.add(new Task(userID, "T03", "SVN", rootRepoPath + s + "jmol-slim" + s + ".git", "28bbc301fcf68294195e5042f7368117bf819b16"));
 
 		tasks.add(new Task(userID, "T04", "Git", rootRepoPath + s + "ActionBarSherlock-slim" + s + ".git", "84ef23bc2599456099ea612dc1dadae379ac50c6"));
