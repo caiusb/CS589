@@ -52,7 +52,7 @@ public class DataProvider {
 		tasks.add(new Task(userID, "T02", "SVN", rootRepoPath + s + "vassal" + s + ".git", "1c06a1d92028995868f9b9e54b063ac472442a3b"));
 		tasks.add(new Task(userID, "T03", "SVN", rootRepoPath + s + "jmol-slim" + s + ".git", "28bbc301fcf68294195e5042f7368117bf819b16"));
 
-		tasks.add(new Task(userID, "T04", "Git", rootRepoPath + s + "ActionBarSherlock" + s + ".git", "0f07d2dde53d1445addbebf440c29dc5adbcf539"));
+		tasks.add(new Task(userID, "T04", "Git", rootRepoPath + s + "ActionBarSherlock-slim" + s + ".git", "84ef23bc2599456099ea612dc1dadae379ac50c6"));
 		tasks.add(new Task(userID, "T05", "Git", rootRepoPath + s + "elasticsearch" + s + ".git", "b591d7fef71b53ec1e6123787a913bb1115e10f2"));
 		tasks.add(new Task(userID, "T06", "Git", rootRepoPath + s + "SlidingMenu" + s + ".git", "1c1d8df60f47081b60e7f678c3b28f5f862fd76d"));
 
