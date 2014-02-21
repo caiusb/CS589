@@ -1,0 +1,2 @@
+Wherever there was ViewPager class operations, adds a check for the ACTION_CANCEL to prevent any further actions.
+Bug fixes and code refactoring.

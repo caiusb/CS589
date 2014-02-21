@@ -1,0 +1,7 @@
+Change some constant values
+moved getQuardricZ static function from Tensor class to SphereRenderer.
+removed scaleEllipsoid from Atom class.
+Some refactoring to Tensor and Atom classes and their propagation to the other classes.
+Eigen added white spaces to make the code more readable.
+internal refactoring in UnitCell class.
+removing unncessary imports.

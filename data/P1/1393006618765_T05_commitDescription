@@ -1,0 +1,1 @@
+Lots of refactoring to make sure that parent type is created explicitly. using a new class from elastic search package to do so: org.elasticsearch.index.search.child.ScoreType instead of import org.elasticsearch.index.query.functionscore.ScoreFunctionBuilders

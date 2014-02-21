@@ -1,0 +1,4 @@
+Added a new attribute for "UNROTATE_PIECES" in CounterDetailViewer class to draw pieces in un-rotated state! + propagate necessary changes to other affected classes.
+refactoring: Properties.java, more meaningful comments and more space between independent lines of code.
+Bug fix: SpecifiedSideAccess.java pieces with Maskable by Any Side trait appear face down in
+decks.

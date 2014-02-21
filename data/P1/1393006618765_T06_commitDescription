@@ -1,0 +1,1 @@
+bug fix: check for savedInstanceState, if it's null create the fragmant, other than that use the existing one.
