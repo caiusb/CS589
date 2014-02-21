@@ -1,0 +1,13 @@
+The commit introduces if statements that checkes if the mouse action has been cancelled. If it has not, then proceed as normal (change page viewed). If it has, then nothing happens.
+
+The commit also reduces the complexity of the code. mLastMotionX is assignement directly, instead of copied in.
+
+The commit also added a ; at the end of public boolean onTouchEvent. I don't know why.
+
+The commit does not instantiate int result in measureLong anymore. I think it is because there was no need of instantiating it before actually needing it to store something else anyway.
+Same for measureShort().
+
+The commit adds @SupressWarnings. 
+ 
+
+

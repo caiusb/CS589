@@ -1,0 +1,4 @@
+The commit is introducing a if statement which check if a Bundle object has value null. It might be to chcke if object is unassigned or not initialized yet. If the Bundle instance is null, then it perfroms what the old code was
+doing.
+The else case does not perform this taskm instead it assigns mFrags by casting a ListFragment object using the same function they used to instantiate an object in the if statement. I can't know what this function (getSupportFragmentManager), as it is not provided in the file.
+BUT, it is called with the 'this' operator, so I can deduce that this function is somewhere in the parents of BaseActivity, most likely in SlidingFragmentActivity.

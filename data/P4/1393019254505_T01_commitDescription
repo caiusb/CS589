@@ -1,0 +1,8 @@
+1. Added the whole FolderLoadThread.java file.
+2. In MessageLoadThread.java 
+Import devmail.settings.
+Checked if keepalive is set to false to process
+3. ImpaConenction.java
+Imported Folderloadthread
+Removed the Folderload thread setup and run() and exception handling  implementation to its separate class.
+Removed the writing functionalities of FolderLoadThread to the newly created seprate class and just called the loadFolder method.

@@ -1,0 +1,17 @@
+The commit creates a new private static final int named R_styleable_Button_textAppearance. This new variable is assigned to zero, and used only once
+when initializing int ap, using getRecourseID from obbject TypedArray.
+
+This int ap is then checked in a if statement. If statement true, then we initalize another TypeArray object, 
+check if object has been initilized and assigne a new value of mAllCaps. the new typeArray is then cleaned out of the program. 
+
+android.R.attr.textAllCaps is changed to android.R.attr.textAppearance - I don't know this API, but I supposed this changed the way the text is displayed
+Instead of being displayed in all caps, the text is display with the normal appearance?
+Many things have been changed from AllCaps to textAppearance - it might just be a refactoring. 
+
+
+
+
+
+
+
+

@@ -1,0 +1,8 @@
+Added handling for UNROTATE_PIECES action:
+1. Added constant UNROTATE_PIECES with action id
+2. Added unrotatePieces flag to be used by action handler
+3. Implemented UNROTATE_PIECES action handler by specifying piece properties if user performs UNROTATE_PIECES action.
+4. Added UNROTATE_PIECES action id to the list of available attributes ( method getAttributeNames() )
+5. Added UNROTATE_PIECES action description (method getAttributeDescriptions() )
+6. Specified type of UNROTATE_PIECES action (method getAttributeTypes() )
+7. Implemented hanler of user actions to detect that user performed UNROTATE_PIECES action 

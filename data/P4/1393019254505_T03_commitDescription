@@ -1,0 +1,8 @@
+In the MagResReader class in the conditional statement changed from 0.04 to .01
+setTypeFactor instead of setScale
+
+changed axes to eigenvecotrs
+while creating the new tensor passing the eigenvectors instead of the axes and added factor.
+
+added getQuardricZ method and called it in spherereader.java
+instaed of measuring iusing scale used the count of elements at 0/1 position to measure the 

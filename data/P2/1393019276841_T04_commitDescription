@@ -1,0 +1,5 @@
+1. Changed R_styleable_Button to use textAppearance instead of textAllCaps property
+2. Added R_styleable_Button_textAppearance
+3. Added R_styleable_TextAppearance to use textAllCaps property
+4. Renamed R_styleable_Button_textAllCaps to R_styleable_TextAppearance_textAllCaps
+5. Changed implementation of CapitalizingButton method to use textAppearance property instead of textAllCaps property

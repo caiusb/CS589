@@ -1,0 +1,6 @@
+first modified the value of action. 
+added an if statement to check if the action was ACTION_CANCEL which was earlier not checking for that.
+Merged 2 lines into 1.
+Removed a semicolon
+assigned intial value of 0 to result
+added the surpresswarning command

@@ -1,0 +1,19 @@
+in FreeRotator.java:
+The commit added a if statement that checkes a variable useUnrotatedShape because returning a value. This boolean is also used later in this file to improve an if statement which 
+checks that the getAngle() of the shape is 0.0 or that the shape is unrotated. 
+
+in Properties.java:
+They just added a bunch of blank lines to make their code more readable. 
+
+in SpecifiedSideAccess.java:
+Added 'the' in the comments.
+They changed the indentation of the class SpecifiedSideAccess.
+
+They simplified the implementation of currentPlayerHasAccess. They are diong essentially the same task but they divded it into a if statement instead of everything in the return statement, which makes it much more 
+easily read.
+
+
+
+
+
+

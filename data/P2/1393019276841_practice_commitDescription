@@ -1,0 +1,4 @@
+1. Changed  action handling by applying ACTION_MASK (not clear why this is needed)
+2. Changed handling of dragging by adding possibility to cancel dragging
+3. Refactored code: made value of mLastMotionX final (not clear why, is it just some convention that is used by GUI programmers?)
+4. Added annotation for 

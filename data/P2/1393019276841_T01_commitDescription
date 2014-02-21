@@ -1,0 +1,5 @@
+1. Extended FolderLoadThread class to handle specific scenario (davmail.imapEnableKeepalive option) of loading folder in separate thread 
+2. Moved FolderLoadThread class to separate file: created separate file for FolderLoadThread class instead of having it in ImapConnection.java file
+3. Introduced handling of davmail.imapEnableKeepalive parameter to make application more customizable/configurable 
+4. Added logging for FolderLoad operation
+5. Added exception handling for Folder Loading

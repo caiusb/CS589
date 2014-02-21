@@ -1,0 +1,2 @@
+Don't perform ViewPager events on ACTION_CANCEL. 
+Initialized variables to 0 and removed unneeded semicolons.

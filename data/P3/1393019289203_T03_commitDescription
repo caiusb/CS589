@@ -1,0 +1,4 @@
+moved scaleEllipsoid to Ellipsoids.java and updated it
+Created setters for parts of an ellipsoid
+overhaul of Tensor.java's getters and setters
+Updated use of eigenValues in multiple files

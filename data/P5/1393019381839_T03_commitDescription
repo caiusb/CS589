@@ -1,0 +1,23 @@
+In MagResReader.java:
+
+In readTensorNew():
+
+float f = (iType == 0 ? 0.04f : 1f); -> I have no idea what this means. 
+
+ atom.tensors[iType].setScale(f) is changed to  atom.tensors[iType].setTypeFactor(f). 
+The whole function setScale has been replace by a block of more detailed function in Tensor.java. Now, atom.tensors[iType] is
+ calling setTypeFactor. setTypeFactor set the Tensor parameter typefacotr to the parameter sent through setTypeFactor (here, 'f') - and set lengths to null.
+In setScale, none of this was done, they just multiply the eigenValues vector by the value sent trhough setScale (here 'f'). 
+
+In readTensorOld(): same comment about setScale transformed into setTypeFactor
+
+In AtomeSetCollection.java:
+
+A variable is refactored: axes is renamed eigenVectors, and a new variable is created, an array of floats named lengths, which stores the eigen values of object t. 
+The rest of the changed code is refactoring the code from axes to eigenVectors.
+
+Finally, from Tensor.fromVectors() is refactored into
+
+
+
+

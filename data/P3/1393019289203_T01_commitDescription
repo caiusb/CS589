@@ -1,0 +1,1 @@
+Refactored to give FolderLoadThread its own file. Removed forcing keepalive to be false.

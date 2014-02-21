@@ -1,0 +1,36 @@
+sooo many commit...
+
+.execute().actionGet(); was refactored into .get()
+
+i am loosing focus... :(
+
+OK so a bunch of stuff is refactor into a more condense form: namely:
+
+
+.execute().actionGet();
+        client().admin().cluster().prepareHealth().setWaitForEvents(Priority.LANGUID).setWaitForGreenStatus().execute().actionGet();
+        client().admin()
+                .indices()
+                .preparePutMapping("test")
+                .setType("child")
+                .setSource(
+                        jsonBuilder().startObject().startObject("child").startObject("_parent").field("type", "parent").endObject()
+                                .endObject().endObject()).execute().actionGet(); 
+
+becomes
+
+addMapping("parent")
+                .addMapping("child", "_parent", "type=parent")
+                .get();
+        ensureGreen();
+
+several times.  
+
+
+same for  client().admin().indices().prepareRefresh().execute().actionGet();
+  which is refacted intor refresh().
+
+
+
+
+

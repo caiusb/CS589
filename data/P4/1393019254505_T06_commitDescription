@@ -1,0 +1,1 @@
+Checks if the savedInstanceState is Null, if not null revoke the last fragment.

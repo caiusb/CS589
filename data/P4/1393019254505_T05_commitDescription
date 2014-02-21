@@ -1,0 +1,20 @@
+removed unused import
+added assertion hitcount package.
+
+added the mapping for parent ,child and grandchild. Instaed of actionget using get method
+
+reduced the number of parameters while creating by removing ".execute().actionGet();
+        client().admin().cluster().prepareHealth().setWaitForEvents(Priority.LANGUID).setWaitForGreenStatus().execute().actionGet();
+        client().admin()
+                .indices()
+                .preparePutMapping("test")
+                .setType("child")
+                .setSource(
+                        jsonBuilder().startObject().startObject("child").startObject("_parent").field("type", "parent").endObject()
+                                .endObject().endObject()).execute().actionGet();
+"
+with get() and ensuregreen()
+execute().actionGet() is replaced by get()
+client().admin().indices().prepareRefresh().execute().actionGet(); is replaced by refresh()
+
+made the child parent mapping simpler

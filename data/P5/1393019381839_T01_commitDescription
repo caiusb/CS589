@@ -1,0 +1,9 @@
+FolderLoadThread.java is a new file.
+
+MessageLoadThread.java:
+introduces a if statement which checks a parameter from the settings before trying/catching the same things than previously. 
+
+ImapConnection.java
+Added the class implemented by the new file FolderLoadThread. 
+
+

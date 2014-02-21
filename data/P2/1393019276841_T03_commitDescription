@@ -1,0 +1,23 @@
+* Changed default value for type factor (0.01 instead of 0.04)
+* Renamed variable eigenVectors to axes
+* Refactored Tensor class and extended tensor calculation algorithm
+	- Removed crtval
+	- Introduced method setTypeFactor
+	- Moved method ONE_OVER_ROOT2_PI around
+	- Renamed attribute isThermalEllipsoid to forThermalEllipsoid
+	- introduced method setLengths
+	- Removed method fromVectors
+	- Removed method setSize
+	- Renamed method getAxesForEllipsoid into setThermal
+	- Removed method getQuardricZ
+	- Removed method getThermalRadius
+	- Removed method getEquationForQuadricWithCenter
+	- Removed method setEllipsoidMatrix 
+* Refactored Eigen class
+	- Changed method getUnitVectors
+	- Changed method fillArrays
+	- Changed formatting
+	- Initialized attribute n with default value 3
+
+
+	

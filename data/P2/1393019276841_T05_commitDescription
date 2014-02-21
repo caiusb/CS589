@@ -1,0 +1,6 @@
+1. Refactored code to use get() method instead of execute().actionGet()
+2. Refactored code to use ensureGreen() method instead of complex chain of methods
+3. Introduced random changes sporadically
+	- addMapping for some methods
+	- usage of refresh() method
+	- Refactored code to use setSource method instead of longer chain of methods
