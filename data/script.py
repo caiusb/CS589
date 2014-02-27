@@ -1,6 +1,10 @@
 import os
 import json
 import numpy
+import matplotlib.pyplot as plt
+
+outputRoot = "analysis"
+percentiles = []
 
 def getImmediateSubdirs(dir):
 	 return [name for name in os.listdir(dir)
@@ -10,10 +14,10 @@ def getJsonForFile(aFilePath):
 	return json.loads(open(aFilePath).read())
 
 def getJSONTasksForParticipant(participantDir):
-	files = [os.path.join(participantDir, name) for name in os.listdir(participantDir)
-			if "events" in name]
+	files = [os.path.join(participantDir, participantFile) for participantFile in os.listdir(participantDir)
+			if "events" in participantFile]
 
-	print [getJsonForFile(eventFile) for eventFile in files]
+	return [getJsonForFile(eventFile) for eventFile in files]
 
 
 def getTypeIntervalsForTask(taskJSON):
@@ -24,5 +28,38 @@ def getTypeIntervalsForTask(taskJSON):
 
 	return numpy.diff(timestamps)
 
-j = getJsonForFile("P1/1393006618765_T03_events")
-print getTypeIntervalsForTask(j)
+def doHistogram(numbers, filePath):
+	plt.hist(numbers, bins=30)
+
+	plt.savefig(filePath + ".jpeg")
+
+	plt.close()
+
+def displayForParticipant(participant):
+	global percentiles
+	tasks = getJSONTasksForParticipant(participant)
+
+	for task in tasks:
+		typeIntervals = getTypeIntervalsForTask(task)
+
+		#print participant
+		#print task[0]["taskID"]
+		#print typeIntervals
+
+		if len(typeIntervals) == 0:
+			continue
+
+		fileName = os.path.join(outputRoot, participant + "_" + task[0]["taskID"])
+
+		doHistogram(typeIntervals, fileName)
+
+		percentiles.append(numpy.percentile(typeIntervals, 90))
+
+displayForParticipant("P1")
+displayForParticipant("P2")
+displayForParticipant("P3")
+displayForParticipant("P4")
+displayForParticipant("P5")
+
+print numpy.mean(percentiles)
+
