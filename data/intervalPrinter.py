@@ -3,7 +3,7 @@ import json
 import numpy
 import matplotlib.pyplot as plt
 
-outputRoot = "analysis"
+outputRoot = os.path.join("analysis", "typeIntervals")
 
 def getImmediateSubdirs(dir):
 	 return [name for name in os.listdir(dir)
