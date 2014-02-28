@@ -4,7 +4,6 @@ import numpy
 import matplotlib.pyplot as plt
 
 outputRoot = "analysis"
-percentiles = []
 
 def getImmediateSubdirs(dir):
 	 return [name for name in os.listdir(dir)
@@ -29,14 +28,15 @@ def getTypeIntervalsForTask(taskJSON):
 	return numpy.diff(timestamps)
 
 def doHistogram(numbers, filePath):
-	plt.hist(numbers, bins=30)
+	plt.hist(numbers, bins=40)
 
 	plt.savefig(filePath + ".jpeg")
 
 	plt.close()
 
 def displayForParticipant(participant):
-	global percentiles
+	percentiles = []
+
 	tasks = getJSONTasksForParticipant(participant)
 
 	for task in tasks:
@@ -55,11 +55,13 @@ def displayForParticipant(participant):
 
 		percentiles.append(numpy.percentile(typeIntervals, 90))
 
+	print numpy.mean(percentiles)
+
 displayForParticipant("P1")
 displayForParticipant("P2")
 displayForParticipant("P3")
 displayForParticipant("P4")
 displayForParticipant("P5")
 
-print numpy.mean(percentiles)
+
 
