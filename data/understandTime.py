@@ -60,16 +60,8 @@ def write(participant, taskJSON, totalTime, typingTime, understandTime):
 	outputFile.write(participant + "," + taskID + "," + commitOrigin + "," + str(totalTime) + "," + str(typingTime) + "," + str(understandTime) + "\n")
 	
 
-def collapseTimeForParticipant(participant):
-	tasks = getJSONTasksForParticipant(participant)
-
-	for task in tasks:
+def getTimes(participant, task):
 		typeIntervals = getTypeIntervalsForTask(task)
-
-		taskID = task[0]["taskID"]
-
-		if taskID == "demo" or taskID == "practice":
-			continue
 
 		if len(typeIntervals) == 0:
 			print(participant + ":" + task[0]["taskID"] + " has zero intervals")
@@ -81,6 +73,21 @@ def collapseTimeForParticipant(participant):
 		totalTime = getEndTime(task) - getStartTime(task)
 
 		understandTime = totalTime - typingTime
+
+		return (totalTime, typingTime, understandTime)
+
+
+
+def collapseTimeForParticipant(participant):
+	tasks = getJSONTasksForParticipant(participant)
+
+	for task in tasks:
+		taskID = task[0]["taskID"]
+		
+		if taskID == "demo" or taskID == "practice":
+			continue
+
+		(totalTime, typingTime, understandTime) = getTimes(participant, task)
 
 		write(participant, task, totalTime, typingTime, understandTime)
 
