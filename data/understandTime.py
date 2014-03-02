@@ -1,3 +1,4 @@
+from __future__ import division
 import os
 import json
 import numpy
@@ -5,7 +6,7 @@ import matplotlib.pyplot as plt
 
 outputFile = open(os.path.join("analysis", "results.csv"), "a")
 
-UNDERSTAND_THRESHOLD = "1400"
+UNDERSTAND_THRESHOLD = 1350
 
 def getImmediateSubdirs(dir):
 	 return [name for name in os.listdir(dir)
@@ -52,11 +53,11 @@ def getEndTime(taskJSON):
 
 	return endEvent[0]["timeMillis"]
 
-def write(participant, taskJSON, understandTime):
+def write(participant, taskJSON, totalTime, typingTime, understandTime):
 	taskID = taskJSON[0]["taskID"]
 	commitOrigin = taskJSON[0]["commitOrigin"]
 
-	outputFile.write(participant + "," + taskID + "," + commitOrigin + "," + str(understandTime) + "\n")
+	outputFile.write(participant + "," + taskID + "," + commitOrigin + "," + str(totalTime) + "," + str(typingTime) + "," + str(understandTime) + "\n")
 	
 
 def collapseTimeForParticipant(participant):
@@ -73,14 +74,17 @@ def collapseTimeForParticipant(participant):
 		if len(typeIntervals) == 0:
 			print(participant + ":" + task[0]["taskID"] + " has zero intervals")
 
-		bigIntervals = [interval for interval in typeIntervals
-						if interval >= UNDERSTAND_THRESHOLD]
+		shortTypeIntervals = [interval for interval in typeIntervals
+								if interval <= UNDERSTAND_THRESHOLD]
 
-		understandTime = getEndTime(task) - getStartTime(task) - numpy.sum(bigIntervals)
+		typingTime = numpy.sum(shortTypeIntervals)
+		totalTime = getEndTime(task) - getStartTime(task)
 
-		write(participant, task, understandTime)
+		understandTime = totalTime - typingTime
 
-outputFile.write("participant,taskID,commitOrigin,understandTime\n")
+		write(participant, task, totalTime, typingTime, understandTime)
+
+outputFile.write("participant,taskID,commitOrigin,totalTime,typingTime,understandTime\n")
 
 collapseTimeForParticipant("P1")
 collapseTimeForParticipant("P2")
