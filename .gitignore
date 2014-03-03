@@ -3,3 +3,11 @@
 .metadata
 bin
 /tool/edu.oregonstate.CS589.comparator/repos/*
+*.aux
+*.log
+*.nav
+*.out
+*.pdf
+*.snm
+*.synctex.gz
+*.toc
