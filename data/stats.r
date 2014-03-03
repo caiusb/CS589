@@ -15,4 +15,7 @@ for (participant in participants){
 	git <<- c(git, mean(gitData$understandTime))
 }
 
+svn <- rep(svn, 6)
+git <- rep(git, 6)
+
 t.test(svn, git, paired=TRUE)
