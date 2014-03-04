@@ -1,3 +1,7 @@
+multiplyData <- function(vector, multiplicationFactor){
+	return(rep(vector, multiplicationFactor))
+}
+
 data <- read.csv("analysis/results.csv", header=TRUE)
 
 participants <- unique(data$participant)
@@ -15,7 +19,7 @@ for (participant in participants){
 	git <<- c(git, mean(gitData$understandTime))
 }
 
-svn <- rep(svn, 6)
-git <- rep(git, 6)
+svn <- multiplyData(svn, 6)
+git <- multiplyData(git, 6)
 
 t.test(svn, git, paired=TRUE)
