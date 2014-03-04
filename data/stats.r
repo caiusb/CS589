@@ -2,19 +2,19 @@ multiplyData <- function(vector, multiplicationFactor){
 	return(rep(vector, multiplicationFactor))
 }
 
-addToFrame <- function(smallData, participant, commitOrigin, totalTime, typingTime, understandTime){
+addToToolData <- function(toolData, participant, commitOrigin, totalTime, typingTime, understandTime){
 	row <- list(participant,
 			commitOrigin,
 			totalTime,
 			typingTime,
 			understandTime)
 
-	smallData[nrow(smallData) + 1, ] <- row
+	toolData[nrow(toolData) + 1, ] <- row
 
-	return(smallData)
+	return(toolData)
 }
 
-buildSmallData <- function(smallData, originalData){
+buildToolData <- function(toolData, originalData){
 	participants <- unique(originalData$participant)
 
 
@@ -32,14 +32,14 @@ buildSmallData <- function(smallData, originalData){
 		gitTypingTime <- mean(gitData$typingTime)
 		gitUnderstandTime <- mean(gitData$understandTime)
 
-		smallData <- addToFrame(smallData,
+		toolData <- addToToolData(toolData,
 								participant,
 								"SVN",
 								svnTotalTime,
 								svnTypingTime,
 								svnUnderstandTime)
 
-		smallData <- addToFrame(smallData,
+		toolData <- addToToolData(toolData,
 								participant,
 								"Git",
 								gitTotalTime,
@@ -48,25 +48,28 @@ buildSmallData <- function(smallData, originalData){
 
 	}
 
-	return(smallData)
+	return(toolData)
 }
 
 originalData <- read.csv("analysis/results.csv", header=TRUE)
 survey <- read.csv("survey.csv", header=TRUE)
 
-smallData <- data.frame(participant = character(),
+toolData <- data.frame(participant = character(),
 						commitOrigin = character(),
 						totalTime = numeric(),
 						typingTime = numeric(),
 						understandTime = numeric(),
 						stringsAsFactors=FALSE)
 
-smallData <- buildSmallData(smallData, originalData)
+toolData <- buildToolData(toolData, originalData)
+write.csv(toolData, file="analysis/toolData.csv")
 
-svn <-smallData[smallData$commitOrigin == "SVN", ]$understandTime
-git <-smallData[smallData$commitOrigin == "Git", ]$understandTime
+svn <-toolData[toolData$commitOrigin == "SVN", ]$understandTime
+git <-toolData[toolData$commitOrigin == "Git", ]$understandTime
 
 svn <- multiplyData(svn, 6)
 git <- multiplyData(git, 6)
 
 t.test(svn, git, paired=TRUE)
+
+
