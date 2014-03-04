@@ -51,6 +51,48 @@ buildToolData <- function(toolData, originalData){
 	return(toolData)
 }
 
+addToParticipantData <- function(participantData, participant, totalTime, typingTime, understandTime){
+	row <- list(participant,
+			totalTime,
+			typingTime,
+			understandTime)
+
+	participantData[nrow(participantData) + 1, ] <- row
+
+	return(participantData)
+}
+
+buildParticipantData <- function(participantData, toolData){
+	participants <- unique(toolData$participant)
+
+
+	for (participant in participants){
+		pData <- toolData[toolData$participant == participant, ]
+
+		totalTime <- mean(pData$totalTime)
+		typingTime <- mean(pData$typingTime)
+		understandTime <- mean(pData$understandTime)
+
+		participantData <- addToParticipantData(participantData,
+								participant,
+								totalTime,
+								typingTime,
+								understandTime)
+	}
+
+	return(participantData)
+}
+
+doStats <- function(){
+	svn <-toolData[toolData$commitOrigin == "SVN", ]$understandTime
+	git <-toolData[toolData$commitOrigin == "Git", ]$understandTime
+
+	svn <- multiplyData(svn, 6)
+	git <- multiplyData(git, 6)
+
+	t.test(svn, git, paired=TRUE)
+}
+
 originalData <- read.csv("analysis/results.csv", header=TRUE)
 survey <- read.csv("survey.csv", header=TRUE)
 
@@ -61,15 +103,18 @@ toolData <- data.frame(participant = character(),
 						understandTime = numeric(),
 						stringsAsFactors=FALSE)
 
+participantData <- data.frame(participant = character(),
+						totalTime = numeric(),
+						typingTime = numeric(),
+						understandTime = numeric(),
+						stringsAsFactors=FALSE)
+
 toolData <- buildToolData(toolData, originalData)
+participantData <- buildParticipantData(participantData, toolData)
+
 write.csv(toolData, file="analysis/toolData.csv")
+write.csv(participantData, file="analysis/participantData.csv")
 
-svn <-toolData[toolData$commitOrigin == "SVN", ]$understandTime
-git <-toolData[toolData$commitOrigin == "Git", ]$understandTime
-
-svn <- multiplyData(svn, 6)
-git <- multiplyData(git, 6)
-
-t.test(svn, git, paired=TRUE)
+doStats()
 
 
