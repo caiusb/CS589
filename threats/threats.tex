@@ -16,43 +16,74 @@
 
 %Description of the experiment (what are we looking for)
 \begin{frame}
-\frametitle{Short description of the experiment}
+\frametitle{Research Questions}
+\begin{enumerate}
+	\item Do SVN commits take more time to understand than Git commits?
+	\item Does user background influence the time it takes to understand a commit?
+	\item Does user background influence the quality~/~depth of understanding a commit~/~change description?
+	%should we remove this last one?
+	\item Is there a common level of change description between people?
+\end{enumerate}
 \end{frame}
 
 %What we did
 \begin{frame}
+\frametitle{Experiment description}
+\begin{itemize}
+	\item Within subject design
+	\item Each participant had to describe the changes done in 6 commits (3 SVN + 3 Git)
+	\item The commit order was randomized to avoid the learning effect
+	\item Commits were randomly chosen for the top projects in SourceForge and GitHub
+\end{itemize}
 \end{frame}
+\note{Describe the commit selection process}
 
 %Internal threats: 
 \begin{frame}
 \frametitle{Internal threats}
+\emph{Is there something inherent to how we collect and analyze the results that could skew our results?}
+
 \begin{itemize}
 	\item{\emph{Selection:}} The different experience levels of the participants can affect the results.
-	\item{\emph{Maturation:}} The participants had to describe a total of 6 commits. 
+	\item{\emph{Maturation:}} The participants had to describe a total of 6 commits.
 	Some reported that the tasks were getting boring after a while.
-	This might affect the end results.
 \end{itemize}
 \end{frame}
 
 %External threats
 \begin{frame}
 \frametitle{External threats}
+\emph{Are our results generalizable?}
+
 \begin{itemize}
-	\item{\emph{}}
+	\item{\emph{Commit selection:}} While the commits were selected randomly, there is a possibility that they are not representative for the general practice. 
+	\item{\emph{Tool:}} For this study we build a special tool. 
+	This might be different than the tools used in the wild.
 \end{itemize}
 \end{frame}
 
 %Construct threats
 \begin{frame}
 \frametitle{Construct threats}
+
+\emph{Are we asking the right questions?}
+
 \begin{itemize}
-	\item{\emph{Commit selection:}} While the commits were selected randomly, there is a possibility that they are not representative for the general practice. 
+	% should we sound our own horn here?
+	\item Recent research has shown that committing behaviour is dependent on the VCS
+	\item The main purpose (other than versioning), of VCS is to provide a context in which changes are made.
 \end{itemize}
 \end{frame}
 
 %Reliability threats
 \begin{frame}
 \frametitle{Reliability threats}
+\emph{Can others replicate our results?}
+
+\begin{itemize}
+	\item We will try out best to offer a complete and accurate description of the experiment.
+	\item The source code of the tool used and the corpus will be made publicly available.
+\end{itemize}
 \end{frame}
 
 \end{document}
