@@ -47,6 +47,21 @@ doRQ2 <- function(toolData, participantData, surveyData){
 	ttest(surveyData$progExperience, participantData$understandTime, FALSE)
 }
 
+doPlots <- function(){
+	pdf(file='analysis/typingTime.pdf', height=6, width=6, onefile=TRUE, family='Helvetica', paper='letter', pointsize=12)
+	options(scipen=999)
+
+	boxplot(originalData$typingTime, xlab="typingTime", ylab="milliseconds")
+
+	svnTime <- originalData[originalData$commitOrigin == "SVN", ]$understandTime
+	gitTime <- originalData[originalData$commitOrigin == "Git", ]$understandTime
+
+	boxplot(svnTime, gitTime, names=c("svn understand times", "git understand times"))
+
+	dev.off()  
+
+}
+
 originalData <- read.csv("analysis/results.csv", header=TRUE)
 toolData <- read.csv("analysis/toolData.csv", header=TRUE)
 participantData <- read.csv("analysis/participantData.csv", header=TRUE)
@@ -55,3 +70,5 @@ surveyData <- read.csv("survey.csv", header=TRUE)
 doRQ1()
 
 doRQ2(toolData, participantData, surveyData)
+
+doPlots()
