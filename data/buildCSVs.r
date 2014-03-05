@@ -1,7 +1,3 @@
-multiplyData <- function(vector, multiplicationFactor){
-	return(rep(vector, multiplicationFactor))
-}
-
 addToToolData <- function(toolData, participant, commitOrigin, totalTime, typingTime, understandTime){
 	row <- list(participant,
 			commitOrigin,
@@ -83,18 +79,7 @@ buildParticipantData <- function(participantData, toolData){
 	return(participantData)
 }
 
-doStats <- function(){
-	svn <-toolData[toolData$commitOrigin == "SVN", ]$understandTime
-	git <-toolData[toolData$commitOrigin == "Git", ]$understandTime
-
-	svn <- multiplyData(svn, 6)
-	git <- multiplyData(git, 6)
-
-	t.test(svn, git, paired=TRUE)
-}
-
 originalData <- read.csv("analysis/results.csv", header=TRUE)
-survey <- read.csv("survey.csv", header=TRUE)
 
 toolData <- data.frame(participant = character(),
 						commitOrigin = character(),
@@ -114,7 +99,3 @@ participantData <- buildParticipantData(participantData, toolData)
 
 write.csv(toolData, file="analysis/toolData.csv")
 write.csv(participantData, file="analysis/participantData.csv")
-
-doStats()
-
-
