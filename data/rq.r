@@ -25,26 +25,47 @@ doRQ2 <- function(toolData, participantData, surveyData){
 	participantData <- subset(participantData, participant != "P1")
 	surveyData <- subset(surveyData, participant != "P1")
 
-	print("----------------------vcsUse AND time----------------------")
-	ttest(surveyData$vcsUse, participantData$understandTime, FALSE)
+	t <- multiplyData(participantData$understandTime, 7)
+	s <- surveyData
 
-	print("----------------------vcsPreference AND time----------------------")
-	ttest(surveyData$vcsPreference, participantData$understandTime, FALSE)
+	progExperience <- multiplyData(s$progExperience, 7)
+	javaExperience <- multiplyData(s$javaExperience, 7)
+	projectType <- multiplyData(s$projectType, 7)
+	vcsPreference <- multiplyData(s$vcsPreference, 7)
+	vcsUse <- multiplyData(s$vcsUse, 7)
+	vcsExperience <- multiplyData(s$vcsExperience, 7)
+	commitFrequency <- multiplyData(s$commitFrequency, 7)
+	splitChanges <- multiplyData(s$splitChanges, 7)
 
-	print("----------------------vcs experience AND time----------------------")
-	ttest(surveyData$vcsExperience, participantData$understandTime, FALSE)
+	formula <- lm(t ~ #progExperience + javaExperience + (progExperience * javaExperience))
+					#projectType *
+					vcsPreference + vcsUse * vcsExperience
+					#commitFrequency *
+					#splitChanges
+				)
 
-	print("----------------------commitFrequency AND time----------------------")
-	ttest(surveyData$commitFrequency, participantData$understandTime, FALSE)
+	(anova(formula))
 
-	print("----------------------splitChanges AND time----------------------")
-	ttest(surveyData$splitChanges, participantData$understandTime, FALSE)
+#	print("----------------------vcsUse AND time----------------------")
+#	ttest(surveyData$vcsUse, participantData$understandTime, FALSE)
 
-	print("----------------------javaExperience AND time----------------------")
-	ttest(surveyData$javaExperience, participantData$understandTime, FALSE)
+#	print("----------------------vcsPreference AND time----------------------")
+#	ttest(surveyData$vcsPreference, participantData$understandTime, FALSE)
 
-	print("----------------------progExperience AND time----------------------")
-	ttest(surveyData$progExperience, participantData$understandTime, FALSE)
+#	print("----------------------vcs experience AND time----------------------")
+#	ttest(surveyData$vcsExperience, participantData$understandTime, FALSE)
+
+#	print("----------------------commitFrequency AND time----------------------")
+#	ttest(surveyData$commitFrequency, participantData$understandTime, FALSE)
+
+#	print("----------------------splitChanges AND time----------------------")
+#	ttest(surveyData$splitChanges, participantData$understandTime, FALSE)
+
+#	print("----------------------javaExperience AND time----------------------")
+#	ttest(surveyData$javaExperience, participantData$understandTime, FALSE)
+
+#	print("----------------------progExperience AND time----------------------")
+#	ttest(surveyData$progExperience, participantData$understandTime, FALSE)
 }
 
 doPlots <- function(){
@@ -67,8 +88,8 @@ toolData <- read.csv("analysis/toolData.csv", header=TRUE)
 participantData <- read.csv("analysis/participantData.csv", header=TRUE)
 surveyData <- read.csv("survey.csv", header=TRUE)
 
-doRQ1()
+#doRQ1()
 
 doRQ2(toolData, participantData, surveyData)
 
-doPlots()
+#doPlots()
