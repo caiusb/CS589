@@ -92,7 +92,7 @@ doRQ4 <- function(grades){
 
 	#----------------------------------
 
-	pdf(file='analysis/grades.pdf', height=6, width=6, onefile=TRUE, family='Helvetica', paper='letter', pointsize=12)
+	pdf(file='analysis/grades.pdf', onefile=TRUE, family='Helvetica', pointsize=12)
 
 	grades <- multiplyDataFrame(grades, 6)
 
@@ -116,20 +116,32 @@ doRQ4 <- function(grades){
 	dev.off()  
 }
 
-doPlots <- function(){
-	pdf(file='analysis/typingTime.pdf', height=6, width=6, onefile=TRUE, family='Helvetica', paper='letter', pointsize=12)
-	options(scipen=999)
+simpleBoxPlot <- function(data, xlab, ylab, fileName){
+	pdf(file=fileName, onefile=TRUE, family='Helvetica', pointsize=12)
 
-	boxplot(originalData$typingTime, xlab="typingTime", ylab="milliseconds")
+	boxplot(data, xlab=xlab, ylab=ylab)
+
+	dev.off()
+}
+
+doPlots <- function(){
+	#typing time
+
+	simpleBoxPlot(originalData$typingTime, "analysis/typingTime.pdf", "Typing Time", "Milliseconds")
+
+	#svn understand time vs Git understand time
 
 	svnTime <- originalData[originalData$commitOrigin == "SVN", ]$understandTime
 	gitTime <- originalData[originalData$commitOrigin == "Git", ]$understandTime
 
+	pdf(file='analysis/typingTime.pdf', onefile=TRUE, family='Helvetica', pointsize=12)
+	
 	boxplot(svnTime, gitTime, names=c("svn understand times", "git understand times"))
 
 	dev.off()  
-
 }
+
+options(scipen=999)
 
 originalData <- read.csv("analysis/results.csv", header=TRUE)
 toolData <- read.csv("analysis/toolData.csv", header=TRUE)
@@ -145,4 +157,4 @@ toolData <- multiplyDataFrame(toolData, 6)
 
 doRQ4(grades)
 
-#doPlots()
+doPlots()
