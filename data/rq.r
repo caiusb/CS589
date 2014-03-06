@@ -68,6 +68,29 @@ doRQ2 <- function(toolData, participantData, surveyData){
 	anova(s$progExperience, t)
 }
 
+doRQ4 <- function(grades){
+	svnGrades <- vector()
+	gitGrades <- vector()
+
+	svnData <- grades[grades$commitOrigin == "SVN", ]
+	gitData <- grades[grades$commitOrigin == "Git", ]
+
+	participants <- unique(grades$participant)
+
+	for(participant in participants){
+		participantSVNGrades <- svnData[svnData$participant == participant, ]$normalizedGrade
+		svnGrades <- c(svnGrades, mean(participantSVNGrades))
+
+		participantGitGrades <- gitData[gitData$participant == participant, ]$normalizedGrade
+		gitGrades <- c(gitGrades, mean(participantGitGrades))
+	} 
+
+	svnGrades <- multiplyData(svnGrades, 5)
+	gitGrades <- multiplyData(gitGrades, 5)
+
+	print(t.test(svnGrades, gitGrades, paired=TRUE))
+}
+
 doPlots <- function(){
 	pdf(file='analysis/typingTime.pdf', height=6, width=6, onefile=TRUE, family='Helvetica', paper='letter', pointsize=12)
 	options(scipen=999)
@@ -87,11 +110,14 @@ originalData <- read.csv("analysis/results.csv", header=TRUE)
 toolData <- read.csv("analysis/toolData.csv", header=TRUE)
 participantData <- read.csv("analysis/participantData.csv", header=TRUE)
 surveyData <- read.csv("survey.csv", header=TRUE)
+grades <- read.csv("grades.csv", header=TRUE)
 
 toolData <- multiplyDataFrame(toolData, 6)
 
 #doRQ1()
 
-doRQ2(toolData, participantData, surveyData)
+#doRQ2(toolData, participantData, surveyData)
+
+doRQ4(grades)
 
 #doPlots()
