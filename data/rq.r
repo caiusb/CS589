@@ -96,6 +96,9 @@ doRQ4 <- function(grades){
 
 	grades <- multiplyDataFrame(grades, 6)
 
+	boxplot(grades$normalizedGrade, xlab="Combined Tasks", ylab="Grades")
+
+
 	T01Grades <- grades[grades$taskID == "T01", ]$normalizedGrade
 	T02Grades <- grades[grades$taskID == "T02", ]$normalizedGrade
 	T03Grades <- grades[grades$taskID == "T03", ]$normalizedGrade
@@ -108,7 +111,7 @@ doRQ4 <- function(grades){
 	colors <- c(rep("red", 3), rep("green", 3))
 	names <- c("T01", "T02", "T03", "T04", "T05", "T06")
 
-	boxplot(T01Grades, T02Grades, T03Grades, T04Grades, T05Grades, T06Grades, names=names, col=colors, xlab="Tasks", ylab="Grades")
+	boxplot(T01Grades, T02Grades, T03Grades, T04Grades, T05Grades, T06Grades, names=names, col=colors, xlab="Individual Tasks", ylab="Grades")
 
 	dev.off()  
 }
