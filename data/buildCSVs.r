@@ -79,7 +79,36 @@ buildParticipantData <- function(participantData, toolData){
 	return(participantData)
 }
 
+#map val from [A, B] to [a, b]. Hopefully.
+mapToInterval <- function(val, A, B, a, b){
+	mappedVal <- (val - A) * (b - a) / (B - A) + a
+	return(mappedVal)
+}
+
+addNormalizedGrades <- function(grades){
+	tasks <- unique(grades$taskID)
+	participants <- unique(grades$participant)
+	
+	grades$normalizedGrade <- grades$descriptionGrade
+
+	for(task in tasks){
+		taskGrades <- grades[grades$taskID == task, ]$descriptionGrade
+		maxGrade <- max(taskGrades)
+
+		for(participant in participants){
+			grade <- grades[grades$participant == participant & grades$taskID == task, ]$descriptionGrade
+
+			normalizedGrade <- mapToInterval(grade, 0, maxGrade, 0, 10)
+
+			grades[grades$participant == participant & grades$taskID == task, ]$normalizedGrade <- normalizedGrade
+		}
+	}
+
+	return(grades)
+}
+
 originalData <- read.csv("analysis/results.csv", header=TRUE)
+grades <- read.csv("grades.csv", header=TRUE)
 
 toolData <- data.frame(participant = character(),
 						commitOrigin = character(),
@@ -97,5 +126,8 @@ participantData <- data.frame(participant = character(),
 toolData <- buildToolData(toolData, originalData)
 participantData <- buildParticipantData(participantData, toolData)
 
+gradesNormalized <- addNormalizedGrades(grades)
+
 write.csv(toolData, file="analysis/toolData.csv")
 write.csv(participantData, file="analysis/participantData.csv")
+write.csv(gradesNormalized, file="grades.csv")
