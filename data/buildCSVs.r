@@ -47,33 +47,37 @@ buildToolData <- function(toolData, originalData){
 	return(toolData)
 }
 
-addToParticipantData <- function(participantData, participant, totalTime, typingTime, understandTime){
+addToParticipantData <- function(participantData, participant, totalTime, typingTime, understandTime, normalizedGrade){
 	row <- list(participant,
 			totalTime,
 			typingTime,
-			understandTime)
+			understandTime,
+			normalizedGrade)
 
 	participantData[nrow(participantData) + 1, ] <- row
 
 	return(participantData)
 }
 
-buildParticipantData <- function(participantData, toolData){
+buildParticipantData <- function(participantData, toolData, normalizedGrades){
 	participants <- unique(toolData$participant)
 
 
 	for (participant in participants){
 		pData <- toolData[toolData$participant == participant, ]
+		participantGrades <- normalizedGrades[normalizedGrades$participant == participant, ]$normalizedGrade
 
 		totalTime <- mean(pData$totalTime)
 		typingTime <- mean(pData$typingTime)
 		understandTime <- mean(pData$understandTime)
+		grades <- mean(participantGrades)
 
 		participantData <- addToParticipantData(participantData,
 								participant,
 								totalTime,
 								typingTime,
-								understandTime)
+								understandTime,
+								grades)
 	}
 
 	return(participantData)
@@ -121,12 +125,16 @@ participantData <- data.frame(participant = character(),
 						totalTime = numeric(),
 						typingTime = numeric(),
 						understandTime = numeric(),
+						normalizedGrade = numeric(),
 						stringsAsFactors=FALSE)
 
-toolData <- buildToolData(toolData, originalData)
-participantData <- buildParticipantData(participantData, toolData)
-
 gradesNormalized <- addNormalizedGrades(grades)
+
+toolData <- buildToolData(toolData, originalData)
+
+participantData <- buildParticipantData(participantData, toolData, gradesNormalized)
+
+
 
 write.csv(toolData, file="analysis/toolData.csv")
 write.csv(participantData, file="analysis/participantData.csv")
