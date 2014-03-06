@@ -36,36 +36,36 @@ doRQ2 <- function(toolData, participantData, surveyData){
 	t <- participantData$understandTime
 	s <- surveyData
 
-#	formula <- lm(t ~ #progExperience + javaExperience + (progExperience * javaExperience))
-#					#projectType *
-#					vcsPreference + vcsUse + (vcsUse * vcsExperience)
-#					#commitFrequency *
-#					#splitChanges
-#				)
+	formula <- lm(t ~ #progExperience + javaExperience + (progExperience * javaExperience))
+					#projectType *
+					s$vcsPreference + s$vcsUse + (s$vcsUse * s$vcsExperience)
+					#commitFrequency *
+					#splitChanges
+				)
+
+	(anova(formula))
+
+
+#	print("----------------------vcsUse AND time----------------------")
+#	anova(s$vcsUse, t)
 #
-#	(anova(formula))
-
-
-	print("----------------------vcsUse AND time----------------------")
-	anova(s$vcsUse, t)
-
-	print("----------------------vcsPreference AND time----------------------")
-	anova(s$vcsPreference, t)
-
-	print("----------------------vcs experience AND time----------------------")
-	anova(s$vcsExperience, t)
-
-	print("----------------------commitFrequency AND time----------------------")
-	anova(s$commitFrequency, t)
-
-	print("----------------------splitChanges AND time----------------------")
-	anova(s$splitChanges, t)
-
-	print("----------------------javaExperience AND time----------------------")
-	anova(s$javaExperience, t)
-
-	print("----------------------progExperience AND time----------------------")
-	anova(s$progExperience, t)
+#	print("----------------------vcsPreference AND time----------------------")
+#	anova(s$vcsPreference, t)
+#
+#	print("----------------------vcs experience AND time----------------------")
+#	anova(s$vcsExperience, t)
+#
+#	print("----------------------commitFrequency AND time----------------------")
+#	anova(s$commitFrequency, t)
+#
+#	print("----------------------splitChanges AND time----------------------")
+#	anova(s$splitChanges, t)
+#
+#	print("----------------------javaExperience AND time----------------------")
+#	anova(s$javaExperience, t)
+#
+#	print("----------------------progExperience AND time----------------------")
+#	anova(s$progExperience, t)
 }
 
 doRQ4 <- function(grades){
@@ -89,6 +89,28 @@ doRQ4 <- function(grades){
 	gitGrades <- multiplyData(gitGrades, 5)
 
 	print(t.test(svnGrades, gitGrades, paired=TRUE))
+
+	#----------------------------------
+
+	pdf(file='analysis/grades.pdf', height=6, width=6, onefile=TRUE, family='Helvetica', paper='letter', pointsize=12)
+
+	grades <- multiplyDataFrame(grades, 6)
+
+	T01Grades <- grades[grades$taskID == "T01", ]$normalizedGrade
+	T02Grades <- grades[grades$taskID == "T02", ]$normalizedGrade
+	T03Grades <- grades[grades$taskID == "T03", ]$normalizedGrade
+	T04Grades <- grades[grades$taskID == "T04", ]$normalizedGrade
+	T05Grades <- grades[grades$taskID == "T05", ]$normalizedGrade
+	T06Grades <- grades[grades$taskID == "T06", ]$normalizedGrade
+
+	print(T06Grades)
+
+	colors <- c(rep("red", 3), rep("green", 3))
+	names <- c("T01", "T02", "T03", "T04", "T05", "T06")
+
+	boxplot(T01Grades, T02Grades, T03Grades, T04Grades, T05Grades, T06Grades, names=names, col=colors, xlab="Tasks", ylab="Grades")
+
+	dev.off()  
 }
 
 doPlots <- function(){
