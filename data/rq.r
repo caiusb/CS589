@@ -24,9 +24,67 @@ doRQ1 <- function(){
 	svnTime <- originalData[originalData$commitOrigin == "SVN", ]$understandTime
 	gitTime <- originalData[originalData$commitOrigin == "Git", ]$understandTime
 
-	pdf(file='analysis/typingTime.pdf', onefile=TRUE, family='Helvetica', pointsize=12)
+	pdf(file='analysis/RQ1_SVNGitTimes.pdf', onefile=TRUE, family='Helvetica', pointsize=12)
 	
 	boxplot(svnTime, gitTime, names=c("SVN Understand Times", "Git Understand Times"))
+
+	dev.off()
+
+	pdf(file='analysis/RQ1_TaskTimes.pdf', onefile=TRUE, family='Helvetica', pointsize=12)
+
+	#understand times per tasks
+	T01Times <- originalData[originalData$taskID == "T01", ]$understandTime
+	T02Times <- originalData[originalData$taskID == "T02", ]$understandTime
+	T03Times <- originalData[originalData$taskID == "T03", ]$understandTime
+	T04Times <- originalData[originalData$taskID == "T04", ]$understandTime
+	T05Times <- originalData[originalData$taskID == "T05", ]$understandTime
+	T06Times <- originalData[originalData$taskID == "T06", ]$understandTime
+
+	colors <- c(rep("red", 3), rep("green", 3))
+	names <- c("T01", "T02", "T03", "T04", "T05", "T06")
+
+	boxplot(T01Times, T02Times, T03Times, T04Times, T05Times, T06Times, names=names, col=colors, xlab="Individual Task times", ylab="Minutes")
+
+	dev.off()
+
+	#participant svn git times
+
+	pdf(file='analysis/RQ1_ParticipantTimes.pdf', onefile=TRUE, family='Helvetica', pointsize=12)
+
+	P01SVNTimes <- originalData[originalData$participant == "P1" & originalData$commitOrigin == "SVN", ]$understandTime
+	P02SVNTimes <- originalData[originalData$participant == "P2" & originalData$commitOrigin == "SVN", ]$understandTime
+	P03SVNTimes <- originalData[originalData$participant == "P3" & originalData$commitOrigin == "SVN", ]$understandTime
+	P04SVNTimes <- originalData[originalData$participant == "P4" & originalData$commitOrigin == "SVN", ]$understandTime
+	P05SVNTimes <- originalData[originalData$participant == "P5" & originalData$commitOrigin == "SVN", ]$understandTime
+
+	P01GitTimes <- originalData[originalData$participant == "P1" & originalData$commitOrigin == "Git", ]$understandTime
+	P02GitTimes <- originalData[originalData$participant == "P2" & originalData$commitOrigin == "Git", ]$understandTime
+	P03GitTimes <- originalData[originalData$participant == "P3" & originalData$commitOrigin == "Git", ]$understandTime
+	P04GitTimes <- originalData[originalData$participant == "P4" & originalData$commitOrigin == "Git", ]$understandTime
+	P05GitTimes <- originalData[originalData$participant == "P5" & originalData$commitOrigin == "Git", ]$understandTime
+
+	colors <- c("red", "green")
+	names <- list()
+
+	for (i in seq(1,5)){
+		names <- c(names, sprintf("P%d: SVN", i))
+		names <- c(names, sprintf("P%d: Git", i))
+	}
+
+	for (name in names){
+		print(sprintf("%s\n", name))
+	}
+
+	boxplot(P01SVNTimes, P01GitTimes, 
+			P02SVNTimes, P02GitTimes,
+			P03SVNTimes, P03GitTimes,
+			P04SVNTimes, P04GitTimes,
+			P05SVNTimes, P05GitTimes,
+			names=names,
+			col=colors,
+			xlab="Participant Times",
+			ylab="Minutes",
+			las=2)
 
 	dev.off()
 }
@@ -76,7 +134,7 @@ doRQ2 <- function(participantData, surveyData){
 
 	doCommonRQ23(participantData, "understandTime", surveyData)
 
-	simpleBoxPlot(participantData$understandTime, "Average Participant Understand Time", "Minutes", "analysis/understandTimeRQ2.pdf")
+	simpleBoxPlot(participantData$understandTime, "Average Participant Understand Time", "Minutes", "analysis/RQ2_understandTime.pdf")
 }
 
 doRQ3 <- function(participantData, surveyData){
@@ -121,19 +179,20 @@ doRQ4 <- function(grades){
 		gitGrades <- c(gitGrades, mean(participantGitGrades))
 	} 
 
-	svnGrades <- multiplyData(svnGrades, 5)
-	gitGrades <- multiplyData(gitGrades, 5)
+	svnGrades <- multiplyData(svnGrades, 6)
+	gitGrades <- multiplyData(gitGrades, 6)
 
 	print(t.test(svnGrades, gitGrades, paired=TRUE))
 
 	#----------------------------------
 
-	pdf(file='analysis/grades.pdf', onefile=TRUE, family='Helvetica', pointsize=12)
-
 	grades <- multiplyDataFrame(grades, 6)
 
+	pdf(file='analysis/RQ4_AllGrades.pdf', onefile=TRUE, family='Helvetica', pointsize=12)
 	boxplot(grades$normalizedGrade, xlab="Combined Tasks", ylab="Grades")
+	dev.off()
 
+	pdf(file='analysis/RQ4_AllGrades.pdf', onefile=TRUE, family='Helvetica', pointsize=12)
 
 	T01Grades <- grades[grades$taskID == "T01", ]$normalizedGrade
 	T02Grades <- grades[grades$taskID == "T02", ]$normalizedGrade
@@ -141,8 +200,6 @@ doRQ4 <- function(grades){
 	T04Grades <- grades[grades$taskID == "T04", ]$normalizedGrade
 	T05Grades <- grades[grades$taskID == "T05", ]$normalizedGrade
 	T06Grades <- grades[grades$taskID == "T06", ]$normalizedGrade
-
-	print(T06Grades)
 
 	colors <- c(rep("red", 3), rep("green", 3))
 	names <- c("T01", "T02", "T03", "T04", "T05", "T06")
