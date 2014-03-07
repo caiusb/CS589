@@ -7,68 +7,104 @@ multiplyDataFrame <- function(dataFrame, times){
 }
 
 doRQ1 <- function(){
+
+	cat("\n\n")
+	print("=============== RQ1 ===============")
+	cat("\n\n")
+
 	svn <-toolData[toolData$commitOrigin == "SVN", ]$understandTime
 	git <-toolData[toolData$commitOrigin == "Git", ]$understandTime
 
-
-
-	#svn <- multiplyData(svn, 6)
-	#git <- multiplyData(git, 6)
-
-	#toolData <- multiplyDataFrame(toolData, 6)
-
-	anova(toolData$understandTime, toolData$commitOrigin)
+	doAnova(toolData$understandTime, toolData$commitOrigin)
 	print(t.test(svn, git, paired=TRUE))
+
+
+	#svn understand time vs Git understand time
+
+	svnTime <- originalData[originalData$commitOrigin == "SVN", ]$understandTime
+	gitTime <- originalData[originalData$commitOrigin == "Git", ]$understandTime
+
+	pdf(file='analysis/typingTime.pdf', onefile=TRUE, family='Helvetica', pointsize=12)
+	
+	boxplot(svnTime, gitTime, names=c("SVN Understand Times", "Git Understand Times"))
+
+	dev.off()
 }
 
-anova <- function(independentVar, dependentVar){
-	print(summary(aov(dependentVar~independentVar)))
+doAnova <- function(dependentVar, independentVar){
+	formula <- lm(dependentVar~independentVar)
+
+	print(summary(aov(formula)))
 }
 
-doRQ2 <- function(toolData, participantData, surveyData){
-	toolData <- subset(toolData, participant != "P1")
+doCommonRQ23 <- function(participantData, participantDataColumn, surveyData){
+	dependentVar <- participantData[[participantDataColumn]]
+	s <- surveyData
+
+	print(paste("----------------------", "vcsUse", "AND", participantDataColumn, "----------------------"))
+	doAnova(dependentVar, s$vcsUse)
+
+	print(paste("----------------------", "vcsPreference", "AND", participantDataColumn, "----------------------"))
+	doAnova(dependentVar, s$vcsPreference)
+
+	print(paste("----------------------", "vcs", "experience AND", participantDataColumn, "----------------------"))
+	doAnova(dependentVar, s$vcsExperience)
+
+	print(paste("----------------------", "commitFrequency", "AND", participantDataColumn, "----------------------"))
+	doAnova(dependentVar, s$commitFrequency)
+
+	print(paste("----------------------", "splitChanges", "AND", participantDataColumn, "----------------------"))
+	doAnova(dependentVar, s$splitChanges)
+
+	print(paste("----------------------", "javaExperience", "AND", participantDataColumn, "----------------------"))
+	doAnova(dependentVar, s$javaExperience)
+
+	print(paste("----------------------", "progExperience", "AND", participantDataColumn, "----------------------"))
+	doAnova(dependentVar, s$progExperience)
+}
+
+doRQ2 <- function(participantData, surveyData){
+	cat("\n\n")
+	print("=============== RQ2 ===============")
+	cat("\n\n")
+
 	participantData <- subset(participantData, participant != "P1")
 	surveyData <- subset(surveyData, participant != "P1")
 
 	participantData <- multiplyDataFrame(participantData, 7)
 	surveyData <- multiplyDataFrame(surveyData, 7)
 
-	t <- participantData$understandTime
+	doCommonRQ23(participantData, "understandTime", surveyData)
+
+	simpleBoxPlot(participantData$understandTime, "Average Participant Understand Time", "Minutes", "analysis/understandTimeRQ2.pdf")
+}
+
+doRQ3 <- function(participantData, surveyData){
+	cat("\n\n")
+	print("=============== RQ3 ===============")
+	cat("\n\n")
+
+	participantData <- multiplyDataFrame(participantData, 6)
+	surveyData <- multiplyDataFrame(surveyData, 6)
+
+	doCommonRQ23(participantData, "normalizedGrade", surveyData)
+
+	grade <- participantData$normalizedGrade
 	s <- surveyData
 
-	formula <- lm(t ~ #progExperience + javaExperience + (progExperience * javaExperience))
-					#projectType *
-					s$vcsPreference + s$vcsUse + (s$vcsUse * s$vcsExperience)
-					#commitFrequency *
-					#splitChanges
-				)
+	formula <- lm(grade ~ s$vcsPreference + s$vcsUse + (s$vcsPreference * s$vcsUse))
+	summary(aov(formula))
 
-	(anova(formula))
-
-
-#	print("----------------------vcsUse AND time----------------------")
-#	anova(s$vcsUse, t)
-#
-#	print("----------------------vcsPreference AND time----------------------")
-#	anova(s$vcsPreference, t)
-#
-#	print("----------------------vcs experience AND time----------------------")
-#	anova(s$vcsExperience, t)
-#
-#	print("----------------------commitFrequency AND time----------------------")
-#	anova(s$commitFrequency, t)
-#
-#	print("----------------------splitChanges AND time----------------------")
-#	anova(s$splitChanges, t)
-#
-#	print("----------------------javaExperience AND time----------------------")
-#	anova(s$javaExperience, t)
-#
-#	print("----------------------progExperience AND time----------------------")
-#	anova(s$progExperience, t)
+	print(t.test(grade~s$vcsUse))
+	print(t.test(grade~s$vcsPreference))
 }
 
 doRQ4 <- function(grades){
+
+	cat("\n\n")
+	print("=============== RQ4 ===============")
+	cat("\n\n")
+
 	svnGrades <- vector()
 	gitGrades <- vector()
 
@@ -127,18 +163,9 @@ simpleBoxPlot <- function(data, xlab, ylab, fileName){
 doPlots <- function(){
 	#typing time
 
-	simpleBoxPlot(originalData$typingTime, "analysis/typingTime.pdf", "Typing Time", "Milliseconds")
+	simpleBoxPlot(originalData$typingTime, "analysis/typingTime.pdf", "Average Participant Typing Time", "Minutes")
 
-	#svn understand time vs Git understand time
 
-	svnTime <- originalData[originalData$commitOrigin == "SVN", ]$understandTime
-	gitTime <- originalData[originalData$commitOrigin == "Git", ]$understandTime
-
-	pdf(file='analysis/typingTime.pdf', onefile=TRUE, family='Helvetica', pointsize=12)
-	
-	boxplot(svnTime, gitTime, names=c("svn understand times", "git understand times"))
-
-	dev.off()  
 }
 
 options(scipen=999)
@@ -146,14 +173,16 @@ options(scipen=999)
 originalData <- read.csv("analysis/results.csv", header=TRUE)
 toolData <- read.csv("analysis/toolData.csv", header=TRUE)
 participantData <- read.csv("analysis/participantData.csv", header=TRUE)
-surveyData <- read.csv("survey.csv", header=TRUE)
+surveyData <- read.csv("surveyNumbers.csv", header=TRUE)
 grades <- read.csv("grades.csv", header=TRUE)
 
 toolData <- multiplyDataFrame(toolData, 6)
 
-#doRQ1()
+doRQ1()
 
-#doRQ2(toolData, participantData, surveyData)
+doRQ2(participantData, surveyData)
+doRQ3(participantData, surveyData)
+
 
 doRQ4(grades)
 
