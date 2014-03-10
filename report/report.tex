@@ -1,4 +1,7 @@
+
 \documentclass[letterpaper]{article}
+
+\usepackage{graphicx}
 
 \title{Does the Version Control System affect commit understandability?}
 \author{Mihai Codoban \and Caius Brindescu}
@@ -99,6 +102,14 @@ For each participant, we will collect the following:
 
 The time needed to understand a commit is determined by subtracting from the time it took to complete a task, the time it took the participants to type in their answer.
 This will eliminate any variation due to varying typing speeds.
+This variation can be seen in figure \ref{fig:typingTimes}.
+
+\begin{figure}[p]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../data/analysis/typingTime.pdf}
+    \caption{Variation between participant typing times. The time for each participant is computed by averaging all the participant's task times.}
+    \label{fig:typingTimes}
+\end{figure}
 
 \section{Results}
 
