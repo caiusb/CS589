@@ -2,6 +2,7 @@
 \documentclass[letterpaper]{article}
 
 \usepackage{graphicx}
+\usepackage{url}
 
 \title{Does the Version Control System affect commit understandability?}
 \author{Mihai Codoban \and Caius Brindescu}
@@ -116,5 +117,51 @@ This variation can be seen in figure \ref{fig:typingTimes}.
 \section{Discussion}
 
 \subsection{Threats to validity}
+
+\subsubsection{Internal Threats}
+
+\paragraph{Maturation.}
+The participants had to describe a total of 6 commits.
+Some participants complained that this activity was hard and boring.
+Therefore there is the risk that participants' effort of understanding decreased with time.
+We mitigate this risk by randomizing the order in which each participant received the tasks.
+
+\subsubsection{External Threats}
+
+\paragraph{Commit Selection.}
+While the commits were selected randomly, there is a possibility that they are not representative for the general practice.
+Projects have thousands of commits and we randomly chose one from each project.
+We tried to pick typical code change commits by choosing from the last commit in a project and filtering noisy commits.
+
+\paragraph{Tool.}
+For this study we build a special tool. 
+This might be different than the tools used in the wild.
+However, for representing the commits we chose the standard Eclipse commit viewer.
+This is a well known graphical model of viewing commits.
+
+\paragraph{Selection.}
+In terms of the population, our results are representative of experienced programmers an experiences VCS users.
+We do not know how the lack of experience might impact commit u
+
+\subsubsection{Construct Threats}
+
+\paragraph{Personal bias of understanding.}
+The participants had to self-assess when they understood all the changes. 
+This varies from person to person. 
+Offering a checklist and grading the responses tried to mitigate this risk as much as possible.
+
+\paragraph{Measuring understanding.}
+We measured the understanding time by subtracting the typing time from the total task time.
+This subtraction is due to different typing times for different people.
+However, except the typing time, participants may not have been mentally engaged in the task at all times.
+
+\paragraph{Ambiguous survey question.}
+The survey question involving VCS use and preference was reported as being ambiguous.
+Participants were not sure whether to respond with their latest preferences or with their overall experience.
+
+\subsubsection{Reliability Threats}
+
+The details described in this paper are sufficient to recreate the experiment.
+Moreover the source code of the tool, collected data, analysis scripts and the survey are publicly available\footnote{\url{github.com/cdmihai/CS589}} \footnote{http://goo.gl/uZM5vL}.
 
 \end{document}
