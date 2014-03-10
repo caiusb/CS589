@@ -3,6 +3,8 @@
 
 \usepackage{graphicx}
 \usepackage{url}
+\usepackage{float}
+
 
 \title{Does the Version Control System affect commit understandability?}
 \author{Mihai Codoban \and Caius Brindescu}
@@ -105,14 +107,22 @@ The time needed to understand a commit is determined by subtracting from the tim
 This will eliminate any variation due to varying typing speeds.
 This variation can be seen in figure \ref{fig:typingTimes}.
 
-\begin{figure}[p]
+\begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{../data/analysis/typingTime.pdf}
+    \includegraphics[width=0.7\textwidth]{../data/analysis/typingTime.pdf}
     \caption{Variation between participant typing times. The time for each participant is computed by averaging all the participant's task times.}
     \label{fig:typingTimes}
 \end{figure}
 
 \section{Results}
+
+\subsection{RQ1: Is the commit understanding time influenced by the VCS?}
+
+\subsection{RQ2: Does the user background (programming experience, etc) influence the time it takes to understand a commit?}
+
+\subsection{RQ3: Does the user background influence the quality and the depth of understanding a commit or a change description?}
+
+\subsection{RQ4: Is there a common level of change description between people?}
 
 \section{Discussion}
 
