@@ -220,9 +220,11 @@ simpleBoxPlot <- function(data, xlab, ylab, fileName){
 doPlots <- function(){
 	#typing time
 
-	simpleBoxPlot(originalData$typingTime, "analysis/typingTime.pdf", "Average Participant Typing Time", "Minutes")
+	pdf(file="analysis/typingTime.pdf", onefile=TRUE, family='Helvetica', pointsize=12)
 
+	boxplot(participantData$typingTime, xlab="Average Participant Typing Time", ylab="Minutes")
 
+	dev.off()
 }
 
 options(scipen=999)
@@ -235,12 +237,10 @@ grades <- read.csv("grades.csv", header=TRUE)
 
 toolData <- multiplyDataFrame(toolData, 6)
 
-doRQ1()
+doPlots()
 
+doRQ1()
 doRQ2(participantData, surveyData)
 doRQ3(participantData, surveyData)
-
-
 doRQ4(grades)
 
-doPlots()
