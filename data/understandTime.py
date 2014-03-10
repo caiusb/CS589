@@ -74,6 +74,10 @@ def getTimes(participant, task):
 
 		understandTime = totalTime - typingTime
 
+		typingTime = typingTime / 60000
+		totalTime = totalTime / 60000
+		understandTime = understandTime / 60000
+
 		return (totalTime, typingTime, understandTime)
 
 

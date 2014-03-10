@@ -1,0 +1,6 @@
+participant,progExperience,javaExperience,projectType,vcsPreference,vcsUse,vcsExperience,commitFrequency,splitChanges
+P1,8,4,Research Project,"Distributed (e.g., Git, Mercurial etc)",Git,3.5,2,Split related changes into small commits
+P2,8,4,Research Project,No preference,Subversion,6,2,Split related changes into small commits
+P3,8,1,Research Project,"Distributed (e.g., Git, Mercurial etc)",Git,0.5,3,Split related changes into small commits
+P4,8,4,Proprietary software Project,No preference,Git,0.5,3,Group changes into one large commit
+P5,4,4,Personal/Class Project,No preference,Subversion,1.5,1,Both
