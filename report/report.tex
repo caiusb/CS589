@@ -50,7 +50,7 @@ They will have the following materials:
 	\item questionnaire
 \end {itemize}
 
-Each participant will describe 3 SVN commits and 3 Git commits.
+Each participant described 3 SVN commits and 3 Git commits.
 Each commit is chosen from a different repository.
 Repositories are chosen from the top 6 Java repositories.
 We selected 3 repositories using Git from GitHub and 3 repositories using SVN from SourceForge.
@@ -117,6 +117,35 @@ This variation can be seen in figure \ref{fig:typingTimes}.
 \section{Results}
 
 \subsection{RQ1: Is the commit understanding time influenced by the VCS?}
+
+%how data looks
+To answer this research question we looked at how long it took participants to understand commits.
+Each participant produced 6 understand times, 3 for SVN and 3 for Git.
+For each participant we averaged the SVN times and Git times thus obtaining two times for the two VCS tools.
+We then separated these times in two bins: one bin of SVN times and one bin of Git times. 
+The averaging of times per participant was done so as not to have related data (more times from the same participant) in the same bin.
+Figure \ref{fig:rq1-data} shows how we arranged the data.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{fig/RQ1-data}
+    \caption{RQ1 data aggregation. Task 1, 2 and 3 represent the SVN tasks whereas Task 4, 5 and 6 represent the Git tasks.}
+    \label{fig:rq1-data}
+\end{figure}
+
+%what test we used on this data
+To test whether the SVN times are different from the Git we performed a paired T-test.
+The test is paired because one SVN data point is connected to one Git data point by the fact that they come from the same participant.
+We thus tested whether participants require different times to understand commits under different VCS tools.
+
+%results of test
+The participants took a longer time to understand SVN commits than Git commits (t = 11.535, df = 29, p-value = 2.352e-12). The difference between the means of the two groups is 2.23 minutes.
+
+%show plots and describe data 
+Figure \ref{fig:rq1-understandTimes} shows the distribution of the overall commit understand times (Git + SVN).
+
+
+%interpretation
 
 \subsection{RQ2: Does the user background (programming experience, etc) influence the time it takes to understand a commit?}
 
