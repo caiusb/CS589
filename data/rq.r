@@ -218,12 +218,14 @@ simpleBoxPlot <- function(data, xlab, ylab, fileName){
 
 doPlots <- function(){
 	#typing time
-
 	pdf(file="analysis/typingTime.pdf", onefile=TRUE, family='Helvetica', pointsize=12)
 
 	boxplot(participantData$typingTime, xlab="Average Participant Typing Time", ylab="Minutes")
 
 	dev.off()
+
+	#all participant times
+	simpleBoxPlot(participantData$understandTime, "Average Participant Understand Time", "Minutes", "analysis/RQ2_AllunderstandTime.pdf")
 }
 
 options(scipen=999)
