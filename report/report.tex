@@ -1,4 +1,3 @@
-
 \documentclass[letterpaper]{article}
 
 \usepackage{graphicx}
@@ -41,6 +40,7 @@ We will have 30 participants (5 people x 6 sessions).
 We plan on recruiting 47 people (30 participants, 2 no-shows per session and 5 pilots).
 
 \subsection{Apparatus or Materials}
+\label{apparatus}
 
 Participants will be viewing commits in a custom made software that for each commit shows the commit message, the diff (using the Eclipse Comparator Editor) and a text box where the commit description would be written.
 They will have the following materials:
@@ -193,10 +193,47 @@ These differences lead to commits that may be easier to understand and reason ab
 The results from RQ1 support this hypothesis.
 Instead of the repository being a series of code dumps, Git repositories are more similar to a series of commits that each tell a cohesive story on how the software evolved.
 
-
-
-
 \subsection{RQ2: Does the user background (programming experience, etc) influence the time it takes to understand a commit?}
+
+In order to gather participant background we used a post study questionnaire (more details in section~\ref{apparatus}).
+
+We answer RQ2 by searching whether there is any questionnaire item that influences participants' commit understand time.
+
+For each participant, we averaged all the understand times, indifferent of the VCS tool.
+Thus we obtained a global understand time for each participant.
+In this research question we ignored the data from participant P1 since he was an outlier, as figures~\ref{fig:rq1-participantTimes}~and~\ref{fig:rq2-understandTimes} show.
+
+We ran ANOVAs that considered the questionnaire questions as being the independent variables (the treatment) and the participant understand times (1 for each participant) the dependent variable.
+Although all questions were found to have a significant influence (P \textless{} 0.05) on the understand time, the mean differences were about 30 seconds.
+
+This difference is meaningless.
+We measured the understand time by subtracting the typing time from the total time of the task.
+Since this is a coarse grained measurement, small time intervals are meaningless since participants may not pay attention for short amounts of times
+Moreover, the understand times of participants P2, P3, P4 and P5 are very consistent, as figure~\ref{fig:rq2-understandTimes} shows. 
+This again renders any small differences meaningless.
+
+\textbf{Interpretation}
+
+%commit understanding is similar to reading, therefore we hypothesized that they would be influences only by experience
+We assume that commit understanding is similar to program comprehensions, since bot require reading and making meaning of code.
+We also assume that programming and language experience would influence program comprehension speed and thus commit understanding.
+Therefore we hypothesized that only these two experiences would influence the understand time of the participants in our study.
+
+%but we found out that there are meaningless differences due to the fact everybody is the same
+However, we found out that all questionnaire questions produces significant but meaningless differences.
+This could be due to the fact that our participants were very close to each  other both in terms of background and in terms of understand time.
+Thus any difference, however meaningless, would appear significant.
+
+%to properly answer this questions we would have to obtain a more representative sample that covers all dev categories
+To answer this question we would need to perform a different study in which we actively sample the population in such a way that we obtain participants from all categories (experienced, inexperienced, java developers, non java developers, etc)
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{../data/analysis/RQ2_AllUnderstandTime}
+    \caption{For each participant all task understand times were averaged together to obtain a representative understand time for that participant. The bottom outlier is participant P1.}
+    \label{fig:rq2-understandTimes}
+\end{figure}
+
 
 \subsection{RQ3: Does the user background influence the quality and the depth of understanding a commit or a change description?}
 
