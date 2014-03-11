@@ -142,10 +142,47 @@ We thus tested whether participants require different times to understand commit
 The participants took a longer time to understand SVN commits than Git commits (t = 11.535, df = 29, p-value = 2.352e-12). The difference between the means of the two groups is 2.23 minutes.
 
 %show plots and describe data 
-Figure \ref{fig:rq1-understandTimes} shows the distribution of the overall commit understand times (Git + SVN).
+Figure \ref{fig:rq1-participantTimes} shows the understand times for each participant, grouped by SVN and Git.
+The plot clearly emphasizes that all participants tended to understand Git commits in less time than SVN commits.
 
+Participant P1 has lower understand times than the rest.
+This is due to the fact that P1 was exposed to a tutorial that did not clearly stat that depth of understanding is to be achieved.
+We therefore changed the tutorial for the rest of the participants.
+This change produced consistent times for participants P2, P3, P4 and P5.
+However, even P1 showed a difference in the understand times between the two VCS tools.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{../data/analysis/RQ1_ParticipantTimes}
+    \caption{Participant understand times for SVN and Git. Red represents SVN tasks and green Git tasks.}
+    \label{fig:rq1-participantTimes}
+\end{figure}
+
+Figure \ref{fig:rq1-taskTimes} shows the understand times grouped by tasks.
+It can be seen that, overall, SVN tasks took a longer time to understand than Git tasks.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{../data/analysis/RQ1_TaskTimes}
+    \caption{Task understand times. Red represents SVN tasks and green Git tasks.}
+    \label{fig:rq1-taskTimes}
+\end{figure}
 
 %interpretation
+
+\textbf{Interpretation}
+
+The difference in times can be accounted for by the differences between Git and SVN. 
+Prior research on the differences between Distributed and Centralized Version Control paradigms shows that DVCS users can perform smaller commits that contain one cohesive intent of change rather than a code dump.
+
+This is due to the fact that DVCS users (i) can work in isolation on local copies of the repositories enabling them to work offline while still retaining full project history, (ii) they can cheaply create and merge branches, and (iii) they can commit individual changed lines in a file, as opposed to being forced to commit a whole file like in CVCS.
+
+These differences lead to commits that may be easier to understand and reason about.
+The results from RQ1 support this hypothesis.
+Instead of the repository being a series of code dumps, Git repositories are more similar to a series of commits that each tell a cohesive story on how the software evolved.
+
+
+
 
 \subsection{RQ2: Does the user background (programming experience, etc) influence the time it takes to understand a commit?}
 
