@@ -82,7 +82,6 @@ doRQ1 <- function(){
 			P05SVNTimes, P05GitTimes,
 			names=names,
 			col=colors,
-			xlab="Participant Times",
 			ylab="Minutes",
 			las=2)
 
