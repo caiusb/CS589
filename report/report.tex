@@ -224,12 +224,13 @@ This could be due to the fact that our participants were very close to each  oth
 Thus any difference, however meaningless, would appear significant.
 
 %to properly answer this questions we would have to obtain a more representative sample that covers all dev categories
+The participants were almost homogeneous in terms of programming and Java experience.
 To answer this question we would need to perform a different study in which we actively sample the population in such a way that we obtain participants from all categories (experienced, inexperienced, java developers, non java developers, etc)
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{../data/analysis/RQ2_AllUnderstandTime}
-    \caption{For each participant all task understand times were averaged together to obtain a representative understand time for that participant. The bottom outlier is participant P1.}
+    \caption{Average understand times for each participant. The bottom outlier is participant P1.}
     \label{fig:rq2-understandTimes}
 \end{figure}
 
@@ -239,24 +240,67 @@ To answer this question we would need to perform a different study in which we a
 %how data looks
 For this and the next research question we graded the commit description.
 We used a grading rubric that noted how many changes participants found in a commit and how deep they detailed them.
-Inside each task we normalized all grades in the following manner: $ [0, MaxTaskGrade] \mapsto [0, 10]  $.
+For each task we normalized all of the task grades in the following manner: $ [0, MaxTaskGrade] \mapsto [0, 10]  $.
 Normalization allows to compare grades between tasks.
 
-For RQ3 we used the same data structures as in RQ2.
+For RQ3 we used the same data structuring as in RQ2.
 The only difference is that we swapped the understand time with the commit description grade.
 Thus for each participant we computed an average grade and explored whether any questionnaire items affect participants' grades.
 
 %what test we used on this data
-
 %results of test
+
+Similar to RQ2, we ran ANOVAs with the questionnaire items as independent variables and the grade as the dependent variable. 
+We discovered that participants' answers to the VCS usage and the VCS paradigm preference questions (see section \ref{apparatus} for questionnaire details) cause a significant difference in the participant grade (P \textless{} 0.05).
+
+We then performed two T-tests with the VCS usage and VCS paradigm preference as independent variables and the participant grade as the dependent variable.
+Both tests showed a significant difference with (p = 1.99e-12, t = -14.78, df = 26.89) for VCS usage and (p = 1.01e-12, t = -11.50, df = 18) for VCS preference.
+
+Tables~\ref{tab:rq3_vcsUsage}~and~\ref{tab:rq3_vcsPreference} show the grade difference between the two question groups.
+As can be seen, participants who answered with Git for the VCS usage question and with Distributed for VCS paradigm preference got lower grades than participants who answered with SVN and No Preference respectively.
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{c | c c c c}
+										& Git  & SVN \\ \hline
+	Average grade & 3.63 & 7.71
+	\end{tabular}
+	\caption{Average grades for participants who responded with Git and SVN for the question referring to VCS usage.}
+	\label{tab:rq3_vcsUsage}
+\end{table}
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{c | c c c c}
+							& Distributed Paradigm  & No Preference \\ \hline
+	Average grade & 2.97 & 6.8 
+	\end{tabular}
+	\caption{Average grades for participants who responded with Distributed and No Preference for the question referring to VCS paradigm prefence. There were no responses for the Centralized paradigm.}
+	\label{tab:rq3_vcsPreference}
+\end{table}
+
 
 %show plots and describe data 
 
 %interpretation
 
+\textbf{Interpretation}
 
+%could be experience ... but all of them are the same
+As with RQ2 and for the same reasons, we hypothesized that the only background attributes that would influence the grade are programming and Java experience.
+Instead, it appears that the participants' declared choice of VCS tool and paradigm influenced the grade and not their experience.
 
+Another explanation would be that VCS tool and paradigm preference may be confounded with experience.
+But our participants are almost homogeneous in terms of experience, so experience is not a confounding factor.
 
+%could be the threat
+Several participants raised the issue that the VCS tool and paradigm preference questions were ambiguous.
+They claimed that it was not clear whether the questions' scope included their whole lifetime or only their latest experiences.
+Therefore the results for this research question may not be valid.
+
+%open question; more research needed
+To answer this question another study is needed in which the focus is on the survey and population sampling.
+The sampling would need to capture participants of all experiences and VCS preferences in order for this question to be answered in a reliable and valid manner.
 
 \subsection{RQ4: Is there a common level of change description between people?}
 
