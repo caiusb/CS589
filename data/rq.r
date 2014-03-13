@@ -183,7 +183,7 @@ doRQ4 <- function(grades){
 
 	print(t.test(svnGrades, gitGrades, paired=TRUE))
 
-	#----------------------------------
+	#----------------------------------Grades by task
 
 	grades <- multiplyDataFrame(grades, 6)
 
@@ -206,6 +206,46 @@ doRQ4 <- function(grades){
 	boxplot(T01Grades, T02Grades, T03Grades, T04Grades, T05Grades, T06Grades, names=names, col=colors, xlab="Individual Tasks", ylab="Grades")
 
 	dev.off()  
+
+	#----------------------------------Grades by participant
+
+	pdf(file='analysis/RQ4_ParticipantGrades.pdf', onefile=TRUE, family='Helvetica', pointsize=12)
+
+	P01SVNGrades <- grades[grades$participant == "P1" & grades$commitOrigin == "SVN", ]$normalizedGrade
+	P02SVNGrades <- grades[grades$participant == "P2" & grades$commitOrigin == "SVN", ]$normalizedGrade
+	P03SVNGrades <- grades[grades$participant == "P3" & grades$commitOrigin == "SVN", ]$normalizedGrade
+	P04SVNGrades <- grades[grades$participant == "P4" & grades$commitOrigin == "SVN", ]$normalizedGrade
+	P05SVNGrades <- grades[grades$participant == "P5" & grades$commitOrigin == "SVN", ]$normalizedGrade
+
+	P01GitGrades <- grades[grades$participant == "P1" & grades$commitOrigin == "Git", ]$normalizedGrade
+	P02GitGrades <- grades[grades$participant == "P2" & grades$commitOrigin == "Git", ]$normalizedGrade
+	P03GitGrades <- grades[grades$participant == "P3" & grades$commitOrigin == "Git", ]$normalizedGrade
+	P04GitGrades <- grades[grades$participant == "P4" & grades$commitOrigin == "Git", ]$normalizedGrade
+	P05GitGrades <- grades[grades$participant == "P5" & grades$commitOrigin == "Git", ]$normalizedGrade
+
+	colors <- c("red", "green")
+	names <- list()
+
+	for (i in seq(1,5)){
+		names <- c(names, sprintf("P%d: SVN", i))
+		names <- c(names, sprintf("P%d: Git", i))
+	}
+
+	for (name in names){
+		print(sprintf("%s\n", name))
+	}
+
+	boxplot(P01SVNGrades, P01GitGrades, 
+			P02SVNGrades, P02GitGrades,
+			P03SVNGrades, P03GitGrades,
+			P04SVNGrades, P04GitGrades,
+			P05SVNGrades, P05GitGrades,
+			names=names,
+			col=colors,
+			ylab="Grades",
+			las=2)
+
+	dev.off()
 }
 
 simpleBoxPlot <- function(data, xlab, ylab, fileName){
