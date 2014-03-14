@@ -192,6 +192,7 @@ doRQ4 <- function(grades){
 	commitOrigin <- c(toolData[toolData$commitOrigin == "SVN", ]$commitOrigin, toolData[toolData$commitOrigin == "Git", ]$commitOrigin)
 
 	formula <- lm(understandTimes ~ commitOrigin + toolGrades + commitOrigin * toolGrades)
+	print(summary(formula))
 	print(summary(aov(formula)))
 
 	#VCS tool and the grade
