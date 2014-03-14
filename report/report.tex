@@ -118,6 +118,9 @@ The time needed to understand a commit is determined by subtracting from the tim
 This will eliminate any variation due to varying typing speeds.
 This variation can be seen in figure \ref{fig:typingTimes}.
 
+In order to subtract the typing time a threshold needs to be set up to differentiate between real typing and thinking pauses.
+For the threshold we used the mental preparation constant (1.2 seconds) from the KLM model \cite{klm}.
+
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{../data/analysis/typingTime.pdf}
@@ -186,7 +189,7 @@ It can be seen that, overall, SVN tasks took a longer time to understand than Gi
 \textbf{Interpretation}
 
 The difference in times can be accounted for by the differences between Git and SVN. 
-Prior research on the differences between Distributed and Centralized Version Control paradigms shows that DVCS users can perform smaller commits that contain one cohesive intent of change rather than a code dump.
+Prior research \cite{brindescu2014centralized} on the differences between Distributed and Centralized Version Control paradigms found that DVCS users can perform smaller commits that contain one cohesive intent of change rather than a code dump.
 
 This is due to the fact that DVCS users (i) can work in isolation on local copies of the repositories enabling them to work offline while still retaining full project history, (ii) they can cheaply create and merge branches, and (iii) they can commit individual changed lines in a file, as opposed to being forced to commit a whole file like in CVCS.
 
@@ -463,5 +466,9 @@ Participants were not sure whether to respond with their latest preferences or w
 
 The details described in this paper are sufficient to recreate the experiment.
 Moreover the source code of the tool, collected data, analysis scripts and the survey are publicly available\footnote{\url{github.com/cdmihai/CS589}} \footnote{goo.gl/uZM5vL}.
+
+% Bibliography
+\bibliographystyle{abbrv}
+\bibliography{report} 
 
 \end{document}
