@@ -82,7 +82,6 @@ doRQ1 <- function(){
 			P05SVNTimes, P05GitTimes,
 			names=names,
 			col=colors,
-			xlab="Participant Times",
 			ylab="Minutes",
 			las=2)
 
@@ -157,6 +156,10 @@ doRQ3 <- function(participantData, surveyData){
 	print(t.test(grade~s$vcsPreference))
 }
 
+getParticipants <- function(dataFrame){
+	return(unique(dataFrame$participant))
+}
+
 doRQ4 <- function(grades){
 
 	cat("\n\n")
@@ -169,9 +172,7 @@ doRQ4 <- function(grades){
 	svnData <- grades[grades$commitOrigin == "SVN", ]
 	gitData <- grades[grades$commitOrigin == "Git", ]
 
-	participants <- unique(grades$participant)
-
-	for(participant in participants){
+	for(participant in getParticipants(grades)){
 		participantSVNGrades <- svnData[svnData$participant == participant, ]$normalizedGrade
 		svnGrades <- c(svnGrades, mean(participantSVNGrades))
 
@@ -184,14 +185,21 @@ doRQ4 <- function(grades){
 
 	print(t.test(svnGrades, gitGrades, paired=TRUE))
 
-	#----------------------------------
+	#anova
 
-	grades <- multiplyDataFrame(grades, 6)
+	toolGrades <- c(svnGrades, gitGrades)
+	understandTimes <- c(toolData[toolData$commitOrigin == "SVN", ]$understandTime, toolData[toolData$commitOrigin == "Git", ]$understandTime)
+	commitOrigin <- c(toolData[toolData$commitOrigin == "SVN", ]$commitOrigin, toolData[toolData$commitOrigin == "Git", ]$commitOrigin)
 
-	pdf(file='analysis/RQ4_AllGrades.pdf', onefile=TRUE, family='Helvetica', pointsize=12)
-	boxplot(grades$normalizedGrade, xlab="Combined Tasks", ylab="Grades")
-	dev.off()
+	formula <- lm(understandTimes ~ commitOrigin + toolGrades + commitOrigin * toolGrades)
+	print(summary(formula))
+	print(summary(aov(formula)))
 
+	#VCS tool and the grade
+
+	doAnova(toolGrades, commitOrigin)
+
+	#----------------------------------Grades by task
 	pdf(file='analysis/RQ4_AllGrades.pdf', onefile=TRUE, family='Helvetica', pointsize=12)
 
 	T01Grades <- grades[grades$taskID == "T01", ]$normalizedGrade
@@ -207,6 +215,62 @@ doRQ4 <- function(grades){
 	boxplot(T01Grades, T02Grades, T03Grades, T04Grades, T05Grades, T06Grades, names=names, col=colors, xlab="Individual Tasks", ylab="Grades")
 
 	dev.off()  
+
+	#----------------------------------Grades by participant
+
+	pdf(file='analysis/RQ4_ParticipantGrades.pdf', onefile=TRUE, family='Helvetica', pointsize=12)
+
+	P01SVNGrades <- grades[grades$participant == "P1" & grades$commitOrigin == "SVN", ]$normalizedGrade
+	P02SVNGrades <- grades[grades$participant == "P2" & grades$commitOrigin == "SVN", ]$normalizedGrade
+	P03SVNGrades <- grades[grades$participant == "P3" & grades$commitOrigin == "SVN", ]$normalizedGrade
+	P04SVNGrades <- grades[grades$participant == "P4" & grades$commitOrigin == "SVN", ]$normalizedGrade
+	P05SVNGrades <- grades[grades$participant == "P5" & grades$commitOrigin == "SVN", ]$normalizedGrade
+
+	P01GitGrades <- grades[grades$participant == "P1" & grades$commitOrigin == "Git", ]$normalizedGrade
+	P02GitGrades <- grades[grades$participant == "P2" & grades$commitOrigin == "Git", ]$normalizedGrade
+	P03GitGrades <- grades[grades$participant == "P3" & grades$commitOrigin == "Git", ]$normalizedGrade
+	P04GitGrades <- grades[grades$participant == "P4" & grades$commitOrigin == "Git", ]$normalizedGrade
+	P05GitGrades <- grades[grades$participant == "P5" & grades$commitOrigin == "Git", ]$normalizedGrade
+
+	colors <- c("red", "green")
+	names <- list()
+
+	for (i in seq(1,5)){
+		names <- c(names, sprintf("P%d: SVN", i))
+		names <- c(names, sprintf("P%d: Git", i))
+	}
+
+	for (name in names){
+		print(sprintf("%s\n", name))
+	}
+
+	boxplot(P01SVNGrades, P01GitGrades, 
+			P02SVNGrades, P02GitGrades,
+			P03SVNGrades, P03GitGrades,
+			P04SVNGrades, P04GitGrades,
+			P05SVNGrades, P05GitGrades,
+			names=names,
+			col=colors,
+			ylab="Grades",
+			las=2)
+
+	dev.off()
+
+	#--------------------------------All grades plots
+	averageParticipantGrades <- vector()
+
+	for (participant in getParticipants(grades)){
+		participantGrades <- grades[grades$participant == participant, ]$normalizedGrade
+		averageParticipantGrades <- c(averageParticipantGrades, mean(participantGrades))
+	}
+
+	averageParticipantGrades <- multiplyData(averageParticipantGrades, 6)
+
+	simpleBoxPlot(averageParticipantGrades, "", "Grades", "analysis/RQ4_AllGradesBoxPlot.pdf")
+
+	pdf(file='analysis/RQ4_AllGradesHistogram.pdf', onefile=TRUE, family='Helvetica', pointsize=12)
+	hist(averageParticipantGrades, xlab="Grades", freq=FALSE, breaks=seq(0, 10), main="")
+	dev.off()
 }
 
 simpleBoxPlot <- function(data, xlab, ylab, fileName){
@@ -219,12 +283,14 @@ simpleBoxPlot <- function(data, xlab, ylab, fileName){
 
 doPlots <- function(){
 	#typing time
-
 	pdf(file="analysis/typingTime.pdf", onefile=TRUE, family='Helvetica', pointsize=12)
 
 	boxplot(participantData$typingTime, xlab="Average Participant Typing Time", ylab="Minutes")
 
 	dev.off()
+
+	#all participant times
+	simpleBoxPlot(participantData$understandTime, "Average Participant Understand Time", "Minutes", "analysis/RQ2_AllunderstandTime.pdf")
 }
 
 options(scipen=999)
