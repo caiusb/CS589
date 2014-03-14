@@ -210,25 +210,25 @@ Although all questions were found to have a significant influence (P \textless{}
 
 This difference is meaningless.
 We measured the understand time by subtracting the typing time from the total time of the task.
-Since this is a coarse grained measurement, small time intervals are meaningless since participants may not pay attention for short amounts of times
+Since this is a coarse grained measurement, small time intervals are meaningless because participants may loose focus at random places in time.
 Moreover, the understand times of participants P2, P3, P4 and P5 are very consistent, as figure~\ref{fig:rq2-understandTimes} shows. 
 This again renders any small differences meaningless.
 
 \textbf{Interpretation}
 
 %commit understanding is similar to reading, therefore we hypothesized that they would be influences only by experience
-We assume that commit understanding is similar to program comprehensions, since bot require reading and making meaning of code.
+We assume that commit understanding is similar to program comprehensions, since both require reading and making meaning of code.
 We also assume that programming and language experience would influence program comprehension speed and thus commit understanding.
 Therefore we hypothesized that only these two experiences would influence the understand time of the participants in our study.
 
 %but we found out that there are meaningless differences due to the fact everybody is the same
-However, we found out that all questionnaire questions produces significant but meaningless differences.
-This could be due to the fact that our participants were very close to each  other both in terms of background and in terms of understand time.
+However, we found out that all questionnaire questions cause significant but meaningless differences.
+This could be due to the fact that our participants were very similar to each  other both in terms of background and in terms of understand time.
 Thus any difference, however meaningless, would appear significant.
 
 %to properly answer this questions we would have to obtain a more representative sample that covers all dev categories
 The participants were almost homogeneous in terms of programming and Java experience.
-To answer this question we would need to perform a different study in which we actively sample the population in such a way that we obtain participants from all categories (experienced, inexperienced, java developers, non java developers, etc)
+To answer this research question in a valid way we would need to perform a different study in which we actively sample the population in such a way that we obtain participants from all categories (experienced, inexperienced, java developers, non java developers, etc)
 
 \begin{figure}[H]
     \centering
@@ -261,7 +261,7 @@ We then performed two T-tests with the VCS usage and VCS paradigm preference as 
 Both tests showed a significant difference with (p = 1.99e-12, t = -14.78, df = 26.89) for VCS usage and (p = 1.01e-12, t = -11.50, df = 18) for VCS preference.
 
 Tables~\ref{tab:rq3_vcsUsage}~and~\ref{tab:rq3_vcsPreference} show the grade difference between the two question groups.
-As can be seen, participants who answered with Git for the VCS usage question and with Distributed for VCS paradigm preference got lower grades than participants who answered with SVN and No Preference respectively.
+Participants who answered with Git for the VCS usage question and with Distributed for VCS paradigm preference got lower grades than participants who answered with SVN and No Preference respectively.
 
 \begin{table}[H]
 	\centering
@@ -294,7 +294,7 @@ As can be seen, participants who answered with Git for the VCS usage question an
 As with RQ2 and for the same reasons, we hypothesized that the only background attributes that would influence the grade are programming and Java experience.
 Instead, it appears that the participants' declared choice of VCS tool and paradigm influenced the grade and not their experience.
 
-Another explanation would be that VCS tool and paradigm preference may be confounded with experience.
+One explanation would be that VCS tool and paradigm preference may be confounded with experience.
 But our participants are almost homogeneous in terms of experience, so experience is not a confounding factor.
 
 %could be the threat
@@ -341,7 +341,7 @@ The T-test between participants' SVN and Git grades did not return a significant
 For a confidence level of 0.95 we cannot reject the null hypothesis that there is no difference between participants' grades for SVN and Git commits.
 However, there is a marginal difference between the two groups with SVN grades being 0.28 higher on average.
 We do not consider this difference meaningful.
-Figures~\ref{fig:rq4-participantGrades}~and~\ref{fig:rq4-taskGrades} show the marginal tendency for SVN grades to be higher.
+Figures~\ref{fig:rq4-participantGrades}~and~\ref{fig:rq4-taskGrades} show the marginal tendency of higher SVN grades.
 
 \begin{figure}[H]
     \centering
@@ -377,18 +377,18 @@ We have two hypotheses why this would be so:
 %how this could affect RQ1
 The results of RQ4 and RQ3 made us revisit RQ1 and take into consideration the grade as a confounding variable.
 If participants get lower grades for Git commits, then this may lead to smaller understand times for Git commits.
-We ran an ANOVA with intercepts in which we considered the understand time as a dependent variable and the VCS tool and the commit grade as the independent variables.
+We ran an ANOVA with intercepts in which we considered the understand time as a dependent variable and the commit origin and the commit grade as the independent variables.
 Table~\ref{tab:rq4_anovas} shows that both independent variables influence the understand time.
-The interaction between VCS tool and commit grade on the other hand does not influence the understand time.
+The interaction between commit origin and commit grade on the other hand does not influence the understand time.
 On the other hand this model explains only 40\% (R squared) of the variation in understand time.
 
 \begin{table}[H]
 	\centering
 	\begin{tabular}{c | c c c c}
-											& DF	&	Mean sq	&	F value	&	Pr(\textgreater F)	\\ \hline
-	VCS tool 							& 1	&	74.51		&	22.77	&	1.35e-5					\\ 
-	Commit grade					& 1	&	65			&	19.87	&	1.03e-5					\\
-	VCS tool : Commit grade	& 1	&	2.2			&	0.63	&	0.41						\\
+													& DF	&	Mean sq	&	F value	&	Pr(\textgreater F)	\\ \hline
+	Commit Origin							& 1	&	74.51		&	22.77	&	1.35e-5					\\ 
+	Commit grade							& 1	&	65			&	19.87	&	1.03e-5					\\
+	Commit Origin : Commit grade	& 1	&	2.2			&	0.63	&	0.41						\\
 	\end{tabular}
 	\caption{Influence of the VCS tool and the commit grade on the understand time.}
 	\label{tab:rq4_anovas}
