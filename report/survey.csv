@@ -1,0 +1,6 @@
+participant,progExperience,javaExperience,projectType,vcsPreference,vcsUse,vcsExperience,commitFrequency,splitChanges
+P1,6 - 10 years,3 - 5 years,Research Project,"Distributed (e.g., Git, Mercurial etc)",Git,3 - 4 years,Several times a day,Split related changes into small commits
+P2,6 - 10 years,3 - 5 years,Research Project,No preference,Subversion,5 - 7 years,Several times a day,Split related changes into small commits
+P3,6 - 10 years,0 - 2 years,Research Project,"Distributed (e.g., Git, Mercurial etc)",Git,less than 1 year,Several times a week,Split related changes into small commits
+P4,6 - 10 years,3 - 5 years,Proprietary software Project,No preference,Git,less than 1 year,Several times a week,Group changes into one large commit
+P5,3 - 5 years,3 - 5 years,Personal/Class Project,No preference,Subversion,1 - 2 years,Several times an hour,Both
