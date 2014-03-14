@@ -156,6 +156,10 @@ doRQ3 <- function(participantData, surveyData){
 	print(t.test(grade~s$vcsPreference))
 }
 
+getParticipants <- function(dataFrame){
+	return(unique(dataFrame$participant))
+}
+
 doRQ4 <- function(grades){
 
 	cat("\n\n")
@@ -168,9 +172,7 @@ doRQ4 <- function(grades){
 	svnData <- grades[grades$commitOrigin == "SVN", ]
 	gitData <- grades[grades$commitOrigin == "Git", ]
 
-	participants <- unique(grades$participant)
-
-	for(participant in participants){
+	for(participant in getParticipants(grades)){
 		participantSVNGrades <- svnData[svnData$participant == participant, ]$normalizedGrade
 		svnGrades <- c(svnGrades, mean(participantSVNGrades))
 
@@ -183,14 +185,20 @@ doRQ4 <- function(grades){
 
 	print(t.test(svnGrades, gitGrades, paired=TRUE))
 
+	#anova
+
+	toolGrades <- c(svnGrades, gitGrades)
+	understandTimes <- c(toolData[toolData$commitOrigin == "SVN", ]$understandTime, toolData[toolData$commitOrigin == "Git", ]$understandTime)
+	commitOrigin <- c(toolData[toolData$commitOrigin == "SVN", ]$commitOrigin, toolData[toolData$commitOrigin == "Git", ]$commitOrigin)
+
+	formula <- lm(understandTimes ~ commitOrigin + toolGrades + commitOrigin * toolGrades)
+	print(summary(aov(formula)))
+
+	#VCS tool and the grade
+
+	doAnova(toolGrades, commitOrigin)
+
 	#----------------------------------Grades by task
-
-	grades <- multiplyDataFrame(grades, 6)
-
-	pdf(file='analysis/RQ4_AllGrades.pdf', onefile=TRUE, family='Helvetica', pointsize=12)
-	boxplot(grades$normalizedGrade, xlab="Combined Tasks", ylab="Grades")
-	dev.off()
-
 	pdf(file='analysis/RQ4_AllGrades.pdf', onefile=TRUE, family='Helvetica', pointsize=12)
 
 	T01Grades <- grades[grades$taskID == "T01", ]$normalizedGrade
@@ -245,6 +253,22 @@ doRQ4 <- function(grades){
 			ylab="Grades",
 			las=2)
 
+	dev.off()
+
+	#--------------------------------All grades plots
+	averageParticipantGrades <- vector()
+
+	for (participant in getParticipants(grades)){
+		participantGrades <- grades[grades$participant == participant, ]$normalizedGrade
+		averageParticipantGrades <- c(averageParticipantGrades, mean(participantGrades))
+	}
+
+	averageParticipantGrades <- multiplyData(averageParticipantGrades, 6)
+
+	simpleBoxPlot(averageParticipantGrades, "", "Grades", "analysis/RQ4_AllGradesBoxPlot.pdf")
+
+	pdf(file='analysis/RQ4_AllGradesHistogram.pdf', onefile=TRUE, family='Helvetica', pointsize=12)
+	hist(averageParticipantGrades, xlab="Grades", freq=FALSE, breaks=seq(0, 10), main="")
 	dev.off()
 }
 
