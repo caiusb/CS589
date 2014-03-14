@@ -150,7 +150,9 @@ The test is paired because one SVN data point is connected to one Git data point
 We thus tested whether participants require different times to understand commits under different VCS tools.
 
 %results of test
-The participants took a longer time to understand SVN commits than Git commits (t = 11.535, df = 29, p-value = 2.352e-12). The difference between the means of the two groups is 2.23 minutes.
+The test returned a significant result (t = 11.535, df = 29, p-value = 2.352e-12). 
+We can thus reject the null hypothesis that there is no difference between participants' understand time of SVN and Git commits.
+The participants took a longer time to understand SVN commits by an average of 2.23 minutes.
 
 %show plots and describe data 
 Figure \ref{fig:rq1-participantTimes} shows the understand times for each participant, grouped by SVN and Git.
@@ -236,11 +238,12 @@ To answer this question we would need to perform a different study in which we a
 
 
 \subsection{RQ3: Does the user background influence the quality and the depth of understanding a commit or a change description?}
+\label{sec:RQ3}
 
 %how data looks
 For this and the next research question we graded the commit description.
 We used a grading rubric that noted how many changes participants found in a commit and how deep they detailed them.
-For each task we normalized all of the task grades in the following manner: $ [0, MaxTaskGrade] \mapsto [0, 10]  $.
+For each task we normalized that task's grades in the following manner: $ [0, MaxTaskGrade] \mapsto [0, 10]  $.
 Normalization allows to compare grades between tasks.
 
 For RQ3 we used the same data structuring as in RQ2.
@@ -305,17 +308,87 @@ The sampling would need to capture participants of all experiences and VCS prefe
 \subsection{RQ4: Is there a common level of change description between people?}
 
 %how data looks
+For this research question we structured the data in the same manner like RQ1 (figure~\ref{fig:rq1-data}).
+The difference is that instead of using the understand time as the dependent variable, we used the normalized grades (see section \ref{sec:RQ3} for grading details).
 
 %what test we used on this data
+To answer this research question we look at the grade distribution in order to see how the common grades look like (and thus, the common level of description).
+We then further explore the question by looking into the difference between SVN task grades and Git task grades by means of a T-test.
 
 %results of test
-
 %show plots and describe data 
+Figures~\ref{fig:rq4-allParticipantsBox}~and~\ref{fig:rq4-allParticipantsHist} show that the grade distribution is marginally normal.
+More data points are needed though for a reliable answer.
+The boxplot shows that on average participants caught half of the commit details.
 
-%interpretation
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{../data/analysis/RQ4_AllGradesBoxPlot}
+    \caption{Participant grades boxplot.}
+    \label{fig:rq4-allParticipantsBox}
+\end{figure}
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{../data/analysis/RQ4_AllGradesHistogram}
+    \caption{Participant grades histogram.}
+    \label{fig:rq4-allParticipantsHist}
+\end{figure}
 
-\section{Discussion}
+The T-test between participants' SVN and Git grades did not return a significant result (p=0.09; t=1.76; df=24). 
+For a confidence level of 0.95 we cannot reject the null hypothesis that there is no difference between participants' grades for SVN and Git commits.
+However, there is a marginal difference between the two groups with SVN grades being 0.28 higher on average.
+We do not consider this difference meaningful.
+Figures~\ref{fig:rq4-participantGrades}~and~\ref{fig:rq4-taskGrades} show the marginal tendency for SVN grades to be higher.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{../data/analysis/RQ4_ParticipantGrades}
+    \caption{Individual participant grades, grouped by SVN (red) and Git (green) tasks.}
+    \label{fig:rq4-participantGrades}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{../data/analysis/RQ4_AllGrades}
+    \caption{Average task grades. SVN tasks are marked with red and Git tasks are marked with green.}
+    \label{fig:rq4-taskGrades}
+\end{figure}
+
+\textbf{Interpretation}
+RQ3 and RQ4 show a marginal tendency of SVN grades to be higher than Git grades.
+
+%why are git grades lower 
+We have two hypotheses why this would be so:
+\begin{enumerate}
+		\item{Biased grading rubric.}
+			Our grading rubric awarded points both for mentioning changes and for detailing the changes as well.
+			It may be that since Git commits tend to be shorter, simpler and more cohesive the participants felt no incentive to detail an already easy and small change.
+			On the other hand, since SVN commits are large, complex and unrelated it may be that participants felt the need to detail them more thoroughly.
+			This would inherently lead to higher SVN grades with our grading rubric.
+	\item{Exaggerated Cost / Benefit Analysis.}
+			When participants see a big commit, they might prepare themselves mentally for a huge workload, therefore they catch more commit changes and thus a higher grade. 
+			On the other hand, when participants see a small commit, they adopt a low mental preparation therefore they catch less commit changes and thus a lower grade.
+\end{enumerate}
+
+%how this could affect RQ1
+The results of RQ4 and RQ3 made us revisit RQ1 and take into consideration the grade as a confounding variable.
+If participants get lower grades for Git commits, then this may lead to smaller understand times for Git commits.
+We ran an ANOVA with intercepts in which we considered the understand time as a dependent variable and the VCS tool and the commit grade as the independent variables.
+Table~\ref{tab:rq4_anovas} shows that both independent variables influence the understand time.
+The interaction between VCS tool and commit grade on the other hand does not influence the understand time.
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{c | c c c c}
+											& DF	&	Mean sq	&	F value	&	Pr(\textgreater F)	\\ \hline
+	VCS tool 							& 1	&	74.51		&	22.77	&	1.35e-5					\\ 
+	Commit grade					& 1	&	65			&	19.87	&	1.03e-5					\\
+	VCS tool : Commit grade	& 1	&	2.2			&	0.63	&	0.41						\\
+	\end{tabular}
+	\caption{Influence of the VCS tool and the commit grade on the understand time.}
+	\label{tab:rq4_anovas}
+\end{table}
 
 \subsection{Threats to validity}
 
@@ -356,6 +429,11 @@ We measured the understanding time by subtracting the typing time from the total
 This subtraction is due to different typing times for different people.
 However, except the typing time, participants may not have been mentally engaged in the task at all times.
 
+\paragraph{Biased Grading Rubric.}
+Our grading rubric takes into account both the quantity of mentioned changes and their depth of detail as well.
+Since Git commits may be smaller, simpler and more cohesive in contrast to SVN commits, participants may be inclined to only mention Git changes and not detail them.
+This would inherently lead to larger grades for SVN commits.
+
 \paragraph{Ambiguous survey question.}
 The survey question involving VCS use and preference was reported as being ambiguous.
 Participants were not sure whether to respond with their latest preferences or with their overall experience.
@@ -363,6 +441,6 @@ Participants were not sure whether to respond with their latest preferences or w
 \subsubsection{Reliability Threats}
 
 The details described in this paper are sufficient to recreate the experiment.
-Moreover the source code of the tool, collected data, analysis scripts and the survey are publicly available\footnote{\url{github.com/cdmihai/CS589}} \footnote{http://goo.gl/uZM5vL}.
+Moreover the source code of the tool, collected data, analysis scripts and the survey are publicly available\footnote{\url{github.com/cdmihai/CS589}} \footnote{goo.gl/uZM5vL}.
 
 \end{document}
