@@ -306,6 +306,7 @@ To answer this question another study is needed in which the focus is on the sur
 The sampling would need to capture participants of all experiences and VCS preferences in order for this question to be answered in a reliable and valid manner.
 
 \subsection{RQ4: Is there a common level of change description between people?}
+\label{seq:rq4}
 
 %how data looks
 For this research question we structured the data in the same manner like RQ1 (figure~\ref{fig:rq1-data}).
@@ -350,12 +351,13 @@ Figures~\ref{fig:rq4-participantGrades}~and~\ref{fig:rq4-taskGrades} show the ma
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\textwidth]{../data/analysis/RQ4_AllGrades}
+    \includegraphics[width=0.7\textwidth]{../data/analysis/RQ4_AllGrades}
     \caption{Average task grades. SVN tasks are marked with red and Git tasks are marked with green.}
     \label{fig:rq4-taskGrades}
 \end{figure}
 
 \textbf{Interpretation}
+
 RQ3 and RQ4 show a marginal tendency of SVN grades to be higher than Git grades.
 
 %why are git grades lower 
@@ -377,6 +379,7 @@ If participants get lower grades for Git commits, then this may lead to smaller 
 We ran an ANOVA with intercepts in which we considered the understand time as a dependent variable and the VCS tool and the commit grade as the independent variables.
 Table~\ref{tab:rq4_anovas} shows that both independent variables influence the understand time.
 The interaction between VCS tool and commit grade on the other hand does not influence the understand time.
+On the other hand this model explains only 40\% (R squared) of the variation in understand time.
 
 \begin{table}[H]
 	\centering
@@ -391,6 +394,22 @@ The interaction between VCS tool and commit grade on the other hand does not inf
 \end{table}
 
 \section{Discussion}
+
+Our lab study shows that commits originating in Git take less time to understand than commits originating in SVN and that the understand time does not depend on participant background.
+
+Participants tend to capture about half of commit details on average with our data hinting that the grade distribution may be normal (although a larger sample size would provide a definite answer).
+
+Most surprisingly, commit grades marginally tend to be higher for SVN commits.
+This finding is supported by two sources: the actual SVN and Git grades from the lab study and the correlation between participant background and commit grades.
+On the other hand, for the lab measurements we do not consider the grade difference as being meaningful (as section \ref{seq:rq4} shows).
+
+%difference in repository structure and behaviour. further research to build a concrete theory of VCS impact on repo structure and dev behaviour
+These results support the theory that developers' change management behaviour varies with the VCS tool.
+We think the results represent yet more evidence that warrants deeper research into how VCS tools impact repository structure and developer behaviour.
+
+%interesting ideas about change understanding
+The difference  between SVN and Git grades remains an open question.
+Our best assumption is that the cause lies within the field of developer cognitive models in the task of program (and program change) comprehension.
 
 \subsection{Threats to validity}
 
